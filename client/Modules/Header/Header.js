@@ -5,7 +5,6 @@ import './Header.less'
 import { addActive } from '../../actions/headerAction';
 class Header extends Component {
     componentDidMount() {
-        console.log(this.props)
     }
     addActiveClassName(index) {
         const {dispatch} = this.props
