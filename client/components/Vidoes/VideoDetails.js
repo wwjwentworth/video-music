@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {fetchVideoDetails} from '../../actions/fetchAction'
+import { refresh } from '../../actions/headerAction';
 import './VideoDetails.less'
+
 class VideoDetails extends Component {
     componentDidMount() {
         const id = window.location.href.split("videos/")[1]
+        const href = window.location.href
         const {dispatch} = this.props
         dispatch(fetchVideoDetails("http://localhost:3000/videos_details", id))
+        dispatch(refresh(href))
     }
     render() {
         const { details } = this.props
@@ -14,9 +18,17 @@ class VideoDetails extends Component {
         return (
             <div className="wwj-video-details">
                 <div className="post-video">
+                {
+                    detailsFetching&&
+                    <div className="loading"><div></div><p>loading</p></div>
+                }
                     {
-                        !detailsFetching &&
-                        <video src={details.items.video} controls autopley="autoplay"></video>
+                        !detailsFetching && details.items.video &&
+                        <video src={details.items.video} controls></video>
+                    }
+                    {
+                        !detailsFetching && details.items.iframe &&
+                        <iframe src={details.items.iframe} frameBorder="0" allowFullScreen wmode="Opaque"></iframe>
                     }
                 </div>
                 <div className="post-details">

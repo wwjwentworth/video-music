@@ -8,13 +8,20 @@ import {
     fetchCutList,
     fetchVideoDetails
 } from '../../actions/fetchAction'
+import { refresh } from '../../actions/headerAction';
 import './Videos.less'
 class Videos extends Component {
     componentDidMount() {
         const { dispatch } = this.props
+        const href = window.location.href
         dispatch(fetchBannerList('http://localhost:3000/videos_banner'))
-        // dispatch(fetchPushonList('http://localhost:3000/videos_push_on'))
+        dispatch(fetchPushonList('http://localhost:3000/videos_push_on'))
         dispatch(fetchCutList('http://localhost:3000/videos_cut'))
+        dispatch(refresh(href))
+    }
+    linkToDetails(id) {
+        const { dispatch } = this.props;
+        dispatch(fetchVideoDetails("http://localhost:3000/videos_details", id))
     }
     render() {
         const { bannerList, pushonList, cutList, play_img } = this.props
@@ -33,7 +40,16 @@ class Videos extends Component {
                 <div className="content">
                     <div className="push-on">
                         <p className="title">YouToBe日推</p>
-                        <ul className="list-item">
+                        <ul className="list-wrap">
+                            {
+                                pushonFetching &&
+                                <li className="list-item">
+                                    <div className="loading">
+                                        <div></div>
+                                        <p>loading</p>
+                                    </div>
+                                </li>
+                            }
                             {
                                 !pushonFetching &&
                                 pushonList.items.map((item, index) => {
@@ -60,6 +76,7 @@ class Videos extends Component {
                     <div className="cut">
                         <p className="title">Cut混剪</p>
                         <ul className="list-wrap">
+
                             {
                                 !cutFetching &&
                                 cutList.items.map((item, index) => {
@@ -68,12 +85,13 @@ class Videos extends Component {
                                             key={index}>
                                             <div className="left" >
                                                 <div className="wrap"></div>
-                                                <Link to={'videos/'+(item._id)}>
-                                                    <img src={item.img} alt=""/>
+                                                <Link to={'videos/' + (item._id)}>
+                                                    <img src={item.img} alt="" />
                                                     <img src={play_img}
-                                                    className="play" alt=""/>
+                                                        onClick={this.linkToDetails.bind(this, item._id)}
+                                                        className="play" alt="" />
                                                 </Link>
-                                                
+
                                             </div>
                                             <div className="right">
                                                 <p>{item.info}</p>
