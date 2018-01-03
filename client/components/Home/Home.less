@@ -214,13 +214,24 @@
                                 }
                                 .hidden{
                                     display: block;
+                                    margin-right: 0.2rem;
                                     position: absolute;
                                     right: 0;
                                     top: 0.8rem;
-                                    width: 2rem;
-                                    height: auto;
+                                    width: 1.8rem;
+                                    height: 2.54rem;
                                     color: #000;
                                     border: 1px solid #bcbfc0;
+                                    border-radius: 4px;
+                                    animation: slow-show 3s ease alternate forwards;
+                                    &>p{
+                                        font-size: .12rem;
+                                        padding: .2rem;
+                                        text-align: left;
+                                        line-height: .24rem;
+                                        font-family: cursive;
+                                        
+                                    }
                                 }
                             }
                             .active{
@@ -239,13 +250,14 @@
                             width: 2.50rem;
                             height: .4rem;
                             border: none;
-                            margin-top: .38rem;
                             border-radius: 0;
                             color: #fff;
                             margin-left: 0.3rem;
                             font-size: .12rem;
                             line-height: .4rem;
                             text-align: center;
+                            bottom: .5rem;
+                            position: absolute;
                         }
                     }
                     .item:after, .item:before{
@@ -276,5 +288,13 @@
                 
             }
         }
+    }
+}
+@keyframes slow-show {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }

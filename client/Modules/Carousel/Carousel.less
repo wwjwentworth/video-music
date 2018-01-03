@@ -12,25 +12,13 @@
         left: 0;
         transition: left 1s;
     }
-    .carousel-item:nth-of-type(1) {
-        background: url('../../assets/406H.jpg');
-        background-size: 100% 100%;
-    }
-    .carousel-item:nth-of-type(2) {
-        background: url('../../assets/408H.jpg');
-        background-size: 100% 100%;
-    }
-    .carousel-item:nth-of-type(3) {
-        background: url('../../assets/409H.jpg');
-        background-size: 100% 100%;
-    }
     .carousel-item{
         display: inline-block;
         height: 100%;
         font-size: .4rem;
         text-align: center;
         position: relative;
-        .wrap,{
+        .wrap{
             position: absolute;
             top: 0;
             left: 0;
@@ -41,19 +29,93 @@
         }
         .content{
             position: absolute;
-            top: .4rem;
             left: 0;
             width: 100%;
-            &>button{
-                height: 0.4rem;
-                cursor: pointer;
-                background-image: linear-gradient(-137deg, #66d796 2%, #3bc29b 100%);
-                border: none;
-                margin-bottom: .38rem;
-                border-radius: 0;
-                color: #fff;
-                width: 2rem;
+            height: 100%;
+            img{
+                width: 100%;
+                height: 100%;
             }
+            &>div{
+                background: rgba(0,0,0,0.2);
+                position: absolute;
+                left: 0;
+                top: 0;
+                text-align: center;
+                width: 100%;
+                height: 100%;
+                font-size: .14rem;
+                &>button{
+                    height: 0.4rem;
+                    cursor: pointer;
+                    background-image: linear-gradient(-137deg, #66d796 2%, #3bc29b 100%);
+                    border: none;
+                    margin-top: .38rem;
+                    border-radius: 0;
+                    color: #fff;
+                    width: 2rem;
+                }
+                .text{
+                    font-size: .36rem;
+                }
+                .text-ch{
+                    margin-top: .4rem;
+                }
+                .item{
+                    opacity: 0;
+                }
+                .post{
+                    background-color: transparent;
+                    position: relative;
+                    padding: 5% 25%;
+                    .post-wrap{
+                        position: absolute;
+                        width: 50%;
+                        height: 300px;
+                        background-color: #000;
+                        opacity: 0.4;
+                    }
+                    .wrap-content{
+                        height: 300px;
+                        text-align: left;
+                        padding:.3rem;
+                        .title{
+                            opacity: 0;
+                            font-size: .28rem;
+                            line-height: 1.3em;
+                            animation: fade-in 2s linear 0.3s forwards;
+                        }
+                        .date,.director,.actors,.info{
+                            padding-left: .12rem;
+                            margin: .1rem;
+                            font-size: .12rem;
+                        }
+                        .date{
+                            animation: fade-in 1s linear 1s forwards;
+                        }
+                        .director{
+                            animation: fade-in 1s linear 1.5s forwards;
+                        }
+                        .actors{
+                            animation: fade-in 1s linear 2s forwards;
+                        }
+                        .info{
+                            animation: fade-in 1s linear 2.5s forwards;
+                        }
+                        &>img{
+                            width: 120px;
+                            height: 120px;
+                            position: absolute;
+                            top: 25%;
+                            left: 52%;
+                            margin-left: -50px;
+                        }
+                    }
+                    
+                }
+                
+            }
+            
         }
     }
     .carousel-arrow{
@@ -66,7 +128,7 @@
         text-align: center;
         top: 0;
         z-index: 100;
-        line-height: 2.7rem;
+        line-height: 600%;
         cursor: pointer;
         font-weight: 700;
         &:hover{
@@ -103,4 +165,8 @@
             border:3px solid @font-color;
         }
     }
+}
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }

@@ -7,7 +7,6 @@ import CarouselDots from './CarouselDots'
 import './Carousel.less'
 class Carousel extends Component{
     componentDidMount() {
-        // console.log(this.props)
     }
     turn(now) {
         const {nowLocal, items, dispatch} = this.props
@@ -28,14 +27,15 @@ class Carousel extends Component{
     }
     render() {
         const {
-            items, nowLocal,speed,arrows,dots,pause
+            items, play_img,nowLocal,speed,arrows,dots,pause
         } = this.props
         const count = items.length;
         let itemNodes = items.map((item, index) => {
             return(
                 <CarouselItem item={item}
                     count={count}
-                    key={'item'+index}>
+                    key={'item'+index}
+                    play_img={play_img}>
                 </CarouselItem>
             )
         })
@@ -66,7 +66,6 @@ function mapStateToProps(state) {
         arrows:carousel.arrows,
         dots:carousel.dots,
         pause:carousel.pause,
-        items:carousel.items
     }
 }
 export default connect(mapStateToProps)(Carousel)

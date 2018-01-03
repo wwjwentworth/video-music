@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {video_addActive} from '../../actions/videoAction'
+import { video_addActive } from '../../actions/videoAction'
 import Carousel from '../../Modules/Carousel/Carousel'
 import Audio from '../../Modules/Audio/Audio'
 import './Home.less'
 import { addActive } from '../../actions/videoAction';
 class Home extends Component {
     addActiveClassName(index) {
-        const {dispatch} = this.props
+        const { dispatch } = this.props
         dispatch(video_addActive(index))
     }
     render() {
@@ -20,7 +20,6 @@ class Home extends Component {
             check_mark,
             check_mark_hover
         } = this.props
-        console.log(option_videos)
         return (
             <div className="home">
                 <div className="banner">
@@ -49,13 +48,12 @@ class Home extends Component {
                                 <button className="btn">START YOUR TRAIL</button>
                             </div>
                             <div className="right movies-right item">
-                                <Carousel/>
+                                <Carousel items={option_videos}/>
                             </div>
                         </div>
                         <div className="music">
                             <div className="right music-right item">
                                 <Audio />
-                            
                             </div>
                             <div className="left music-left item">
                                 <p className="text">Watch Thousands of Shows and Movies Anytime, Anywhere</p>
@@ -77,13 +75,18 @@ class Home extends Component {
                                     <ul className="list-wrap">
                                         {
                                             option_videos.map((video, index) => {
-                                                return(
-                                                    <li className={"list-item "+(video.active?"active":"")}
+                                                return (
+                                                    <li className={"list-item " + (video.active ? "active" : "")}
                                                         key={index}
                                                         onMouseOver={this.addActiveClassName.bind(this, index)}>
                                                         <div className="check-mark"></div>
-                                                        {video.title}
-                                                        <div className={'info '+(video.active?"hidden":"")}>{video.info}</div>
+                                                        {video.headline}
+                                                        <div className={'info ' + (video.active ? "hidden" : "")}>
+                                                            <p>
+                                                                {video.description}
+                                                            </p>
+
+                                                        </div>
                                                     </li>
                                                 )
                                             })
@@ -107,9 +110,9 @@ function mapStateToProps(state) {
         banner_arrow: home.banner_arrow,
         option_vimg: home.option_vimg,
         play_img: home.play_img,
-        option_videos : video.items,
-        check_mark:video.check_mark,
-        check_mark_hover:video.check_mark_hover
+        option_videos: home.items,
+        check_mark: home.check_mark,
+        check_mark_hover: home.check_mark_hover
     }
 }
 export default connect(mapStateToProps)(Home)

@@ -7,19 +7,7 @@ function carousel(state = {
     autoplay:true,
     dots:true,
     arrows:true,
-    items:[{
-        text_ch:'YouToBe 日推',
-        text_en:'Push On',
-        href:'#',
-    },{
-        text_ch:'YouToBe 日推',
-        text_en:'Push On',
-        href:'#',
-    },{
-        text_ch:'YouToBe 日推',
-        text_en:'Push On',
-        href:'#',
-    }]
+    items:[]
 }, action) {
     switch(action.type) {
         case NOW_LOCAL:
