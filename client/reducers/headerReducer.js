@@ -33,6 +33,7 @@ function header(state = {
     }]
 }, action) {
     let nav_links = state.nav_links.concat();
+    let user_links = state.user_links.concat();
     switch (action.type) {
         
         case ADD_ACTIVE:
@@ -41,23 +42,33 @@ function header(state = {
             for (let i = 0; i < nav_links.length; i++) {
                 nav_links[i].active = false;
             }
-            nav_links[action.index].active = true;
+            for (let i = 0; i < user_links.length; i++) {
+                user_links[i].active = false;
+            }
+            user_links[action.index].active = true;
             return Object.assign({}, state, {
                 nav_links: nav_links,
+                user_links:user_links
             })
         case REFRESH:
             
             for (let i = 0; i < nav_links.length; i++) {
-                console.log()
                 if(action.href.indexOf((nav_links[i].text.toLowerCase())) > 0) {
                     nav_links[i].active = true;
                 } else {
                     nav_links[i].active = false;
                 }
-                
+            }
+            for (let i = 0; i < user_links.length; i++) {
+                if(action.href.indexOf((user_links[i].text.toLowerCase())) > 0) {
+                    user_links[i].active = true;
+                } else {
+                    user_links[i].active = false;
+                }
             }
             return Object.assign({}, state, {
                 nav_links: nav_links,
+                user_links:user_links
             })
         default:
             return state

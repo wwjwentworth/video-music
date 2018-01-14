@@ -13,6 +13,7 @@ class Carousel extends Component{
         now = nowLocal+now;
         if(now < 0) {
             now += items.length
+            
         }
         if(now >= items.length) {
             now -= items.length

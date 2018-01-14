@@ -8,6 +8,8 @@ import carousel from '../reducers/carouselReduver'
 import video from '../reducers/videoReducer'
 import videoDetails from '../reducers/videoDetailsReducer'
 import audio from '../reducers/audioReducer'
+import login from '../reducers/loginReducer'
+import register from '../reducers/registerReducer'
 const loggerMiddleware = createLogger()
 const rootReducer = combineReducers({
     header,
@@ -15,7 +17,9 @@ const rootReducer = combineReducers({
     carousel,
     video,
     videoDetails,
-    audio
+    audio,
+    login,
+    register
 })
 export default function configStore(preloadeState) {
     return createStore(

@@ -100,13 +100,10 @@ function receiveVideoDetails(url, json) {
 }
 
 export function fetchVideoDetails(url, id) {
-   
     return (dispatch, getState) => {
         const items = getState().videoDetails.details.items
-       
         if (Object.keys(items).length === 0) {
             dispatch(requestVideoDetails(url))
-            console.log(222,items)
             return fetch(url, {
                 method:'POST',
                 body:JSON.stringify({

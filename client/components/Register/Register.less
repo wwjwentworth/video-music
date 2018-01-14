@@ -1,0 +1,52 @@
+@primary-color:#4ae096;
+@font-color:#3bc29b;
+.wwj-register{
+    width: 100%;
+    height: -webkit-fill-available;
+    background: url('../../assets/login.jpg');
+    background-size: 100% 100%;
+    position: relative;
+    .login-form{
+        width: 4rem;
+        margin: auto;
+        background-color: #fff;
+        position: absolute;
+        top: 50%;
+        margin-top: -2rem;
+        left: 50%;
+        margin-left: -2rem;
+        padding: .3rem;
+        border-radius: 4px;
+        .form-title{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img{
+                width: .25rem;
+                height: .25rem;
+                margin-right: .05rem;
+                vertical-align: middle;
+            }
+            span{
+                font-size: .16rem;
+                font-weight: 700;
+                color: @font-color;
+                vertical-align: middle;
+            }
+        }
+        .forgot{
+            color: #376c99;
+            float: right;
+        }
+        .form-btn{
+            background-color: @font-color;
+            color: #fff;
+            width: 100%;
+        }
+        .login{
+            text-align: center;
+            color: @font-color;
+            display: block;
+        }
+    }
+}
