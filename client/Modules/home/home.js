@@ -1,19 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { video_addActive } from '../../actions/videoAction'
-import Carousel from '../../components/Carousel/Carousel'
-import Audio from '../../components/Audio/Audio'
+import Carousel from '../../components/carousel/carousel'
+import Audio from '../../components/audio/audio'
 import './home.less'
-import { addActive } from '../../actions/videoAction';
 class Home extends Component {
-    addActiveClassName(index) {
-        const { dispatch } = this.props
-        dispatch(video_addActive(index))
-    }
-    componentDidMount() {
-        console.log(this.props.home)
-    }
     render() {
         const {home} = this.props
         const {

@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Home from '../../Modules/home/home'
 import Video from '../../Modules/video/video'
-// import VideoDetails from '../../Modules/Vidoes/VideoDetails'
-// import Music from '../../Modules/Music/Music'
+import Music from '../../Modules/music/music'
 // import Community from '../../Modules/Community/Community'
 // import Login from '../../Modules/Login/Login'
 // import Register from '../../Modules/Register/Register'
 import Header from '../../components/header/header'
 import Footer from '../../components/footer/footer'
 import './App.less'
+import videoDetails from '../../Modules/video/video.details';
 class App extends Component {
     render() {
         return (
@@ -17,18 +17,13 @@ class App extends Component {
                 <div className="app">
                     <Header></Header>
                     <Switch>
-                        <Route exact path='/' component={Home} />
+                        <Route exact path='/home ' component={Home} />
                         <Route exact path='/video' component={Video} />
+                        <Route exact path='/video/:videoID' component={videoDetails} />
+                        <Route exact path='/music' component={Music} />
                     </Switch>
                     <Footer></Footer>
                 </div>
-                    {/* <Route exact path='/videos' component={Videos} />
-                    <Route exact path="/videos/:videoID" component={VideoDetails} />
-                    <Route exact path='/music' component={Music} />
-                    <Route exact path='/community' component={Community} />
-                    <Route exact path='/login' component={Login} />
-                    <Route exact path='/register' component={Register} />
-                    <Footer></Footer> */}
             </BrowserRouter>
         )
     }

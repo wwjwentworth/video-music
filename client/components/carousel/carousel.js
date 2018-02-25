@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as carouselAction from './carousel.action'
-import CarouselItem from './carouselItem'
-import CarouselArrows from './carouselArrows'
-import CarouselDots from './carouselDots'
+import CarouselItem from './carousel.item'
+import CarouselArrows from './carousel.arrows'
+import CarouselDots from './carousel.dots'
 import './Carousel.less'
 class Carousel extends Component{
     
@@ -20,19 +20,11 @@ class Carousel extends Component{
         }
         dispatch(carouselAction.changeNowLocal(now))
     }
-    goPlay() {
-
-    }
-    pausePlay() {
-
-    }
     render() {
-        const items = this.props.items
-        const {
-           play_img,nowLocal,speed,arrows,dots,pause
+        const {items, play_img} = this.props
+        const { nowLocal,speed,arrows,dots,pause
         } = this.props.carousel
         const count = items.length;
-        console.log(items)
         let itemNodes = items.map((item, index) => {
             return(
                 <CarouselItem item={item}

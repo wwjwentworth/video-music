@@ -9,7 +9,7 @@ class AudioItem extends Component {
         let audioNode = this.refs.audio
         const duration = Math.ceil(audioNode.duration)
         dispatch(audioAction.play(index, duration))
-        console.log(this.props)
+        // console.log(this.props)
         if (item.play) {
             audioNode.play()
         }

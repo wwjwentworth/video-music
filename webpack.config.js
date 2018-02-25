@@ -5,12 +5,13 @@ let HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   filename: 'index.html',
   inject: 'body'
 })
-
 module.exports = {
+  devtool: 'source-map',//配置生成Source Maps，选择合适的选项
   entry: ['babel-polyfill','./client/index.js'],
   output: {
     path: path.resolve('./dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    // publicPath:'dist'
   },
   module: {
     loaders: [
@@ -37,5 +38,13 @@ module.exports = {
       }
     ]
   },
-  plugins: [HtmlWebpackPluginConfig]
+  plugins: [HtmlWebpackPluginConfig],
+  devServer:{
+    inline:true,
+    port:1004,
+    open:true,
+    historyApiFallback:{
+      index:'dist/index.html'
+  },
+  }
 }
