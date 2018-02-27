@@ -10,6 +10,7 @@ import Header from '../../components/header/header'
 import Footer from '../../components/footer/footer'
 import './App.less'
 import videoDetails from '../../Modules/video/video.details';
+import musicDetails from '../../Modules/music/music.details'
 class App extends Component {
     render() {
         return (
@@ -17,10 +18,11 @@ class App extends Component {
                 <div className="app">
                     <Header></Header>
                     <Switch>
-                        <Route exact path='/home ' component={Home} />
+                        <Route exact path='/ ' component={Home} />
                         <Route exact path='/video' component={Video} />
                         <Route exact path='/video/:videoID' component={videoDetails} />
                         <Route exact path='/music' component={Music} />
+                        <Route exact path='/music/:musicID' component={musicDetails}/>
                     </Switch>
                     <Footer></Footer>
                 </div>

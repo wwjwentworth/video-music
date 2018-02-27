@@ -1,5 +1,5 @@
 export const nav_links = [{
-    path: '/home',
+    path: '/',
     text: 'HOME',
     active: true
 }, {

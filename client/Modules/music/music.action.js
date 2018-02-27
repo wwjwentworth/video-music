@@ -14,3 +14,19 @@ export function getMusicListDone(payload) {
         payload
     }
 }
+
+export const GET_MUSIC_DETAILS = 'GET_MUSIC_DETAILS'
+export function getMusicDetails(payload) {
+    return {
+        type:GET_MUSIC_DETAILS,
+        payload
+    }
+}
+
+export const GET_MUSIC_DETAILS_DONE = 'GET_MUSIC_DETAILS_DONE'
+export function getMusicDetailsDone(payload) {
+    return {
+        type:GET_MUSIC_DETAILS_DONE,
+        payload
+    }
+}

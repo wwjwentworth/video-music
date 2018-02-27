@@ -13,6 +13,7 @@ class Music extends Component {
     }
     
     render() {
+
         return (
             <div className="wwj-music">
                 <Tabs defaultActiveKey="musicList" className="tabs">
