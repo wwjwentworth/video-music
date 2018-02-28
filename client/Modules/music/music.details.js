@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import * as musicActions from './music.action'
 
 import DetailsHeader from './music-details-header/header'
+import DetailsContent from './music-details-song-list/content'
 class MusicDetails extends Component {
     componentDidMount() {
         const {dispatch, match:{params:{musicID}}} = this.props
@@ -11,10 +12,14 @@ class MusicDetails extends Component {
     }
     render() {
         const {musicDetails} = this.props.music
-        // console.log(musicDetails)
         return(
             <div className="wwj-music-details">
                 <DetailsHeader playlist={musicDetails.playlist}></DetailsHeader>
+                {
+                    musicDetails.playlist ? 
+                    <DetailsContent tracks={musicDetails.playlist.tracks}></DetailsContent> : null
+                }
+                
             </div>
         )
     }
