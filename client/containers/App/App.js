@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Home from '../../Modules/home/home'
 import Video from '../../Modules/video/video'
 import Music from '../../Modules/music/music'
+import Player from '../../Modules/player/player'
 // import Community from '../../Modules/Community/Community'
 // import Login from '../../Modules/Login/Login'
 // import Register from '../../Modules/Register/Register'
@@ -25,6 +26,7 @@ class App extends Component {
                         <Route exact path='/music' component={Music} />
                         <Route exact path='/music/:musicID' component={musicDetails}/>
                     </Switch>
+                    <Player></Player>
                     <Footer></Footer>
                 </div>
             </BrowserRouter>

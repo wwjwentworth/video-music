@@ -6,6 +6,8 @@ export function getMusicList(limit, pagenum) {
 export function getMusicDetails(musicID) {
     return axios.get(`https://api.imjad.cn/cloudmusic/?type=playlist&id=${musicID}`)
 }
+
+
 export function showMessage(type, content) {
     return message[type](content)
 }

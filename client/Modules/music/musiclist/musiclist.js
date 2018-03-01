@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import * as musicActions from '../music.action'
 import './musiclist.less'
 class MusicList extends Component {
@@ -14,21 +14,23 @@ class MusicList extends Component {
         console.log(musicList)
         return (
             <div className="music-list">
-                {
-                    musicList.map((music, index) => {
-                        return (
-                            <div className="list-item" key={index}>
-                                <div className="img">
-                                    <Link to={`/music/${music.id}` }>
-                                        <img src={music.imgUrl} alt="playlist-cover" />
-                                    </Link>
+                <div className="wrap">
+                    {
+                        musicList.map((music, index) => {
+                            return (
+                                <div className="list-item" key={index}>
+                                    <div className="img">
+                                        <Link to={`/music/${music.id}`}>
+                                            <img src={music.imgUrl} alt="playlist-cover" />
+                                        </Link>
+                                    </div>
+                                    <div className="title">{music.title}</div>
+                                    <div className="creator">{music.creator}</div>
                                 </div>
-                                <div className="title">{music.title}</div>
-                                <div className="creator">{music.creator}</div>
-                            </div>
-                        )
-                    })
-                }
+                            )
+                        })
+                    }
+                </div>
             </div>
         )
     }

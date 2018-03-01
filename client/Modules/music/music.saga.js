@@ -25,12 +25,14 @@ function* handleGetMusicDetails() {
         }
     }
 }
+
+
 function* handleMusicErr(err) {
-    yield call(videoService.showMessage, 'error', err)
+    yield call(musicService.showMessage, 'error', err)
 }
 export default function* videoSaga() {
     yield all([
       fork(handleGetMusicList),
-      fork(handleGetMusicDetails)
+      fork(handleGetMusicDetails),
     ])
 }

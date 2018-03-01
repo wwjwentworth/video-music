@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import * as headerActions from '../../components/header/header.action'
 
 import MusicList from './musiclist/musiclist'
+import Player from '../player/player'
 import  './music.less'
 import {Tabs} from 'antd'
 const TabPane = Tabs.TabPane;
@@ -22,9 +23,7 @@ class Music extends Component {
                         <MusicList></MusicList>
                     </TabPane>
                 </Tabs>
-                <div className="views">
-
-                </div>
+                
             </div>
         )
     }
