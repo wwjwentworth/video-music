@@ -40,7 +40,8 @@ class Content extends Component {
             render:(artist) => {
                 return(
                     <div className="artist">
-                        <Icon type="plus-circle" />{artist}
+                        <Icon type="plus-circle"/>
+                        <Link to={`/artist/${artist[0].id}`}>{artist[0].name}</Link>
                     </div>
                 )
             }
@@ -58,15 +59,13 @@ class Content extends Component {
         const { tracks } = this.props
         let dataSource = []
         tracks.map((track, index) => {
-            track.ar.map((t, index) => {
-                dataSource.push({artist: t.name})
-            })
-            Object.assign(dataSource[index], {
+            dataSource.push({
                 key: index,
                 sequence: specIndex(index),
                 name: track.name,
                 album: track.al.name,
-                time: formatDuration(track.dt)
+                time: formatDuration(track.dt),
+                artist:track.ar,
             })
         })
         this.setState({
@@ -75,17 +74,17 @@ class Content extends Component {
     }
     playSong = (song) => {
         const {dispatch} = this.props
-        console.log(song)
         dispatch(playerActions.playSong(song))
     }
     render() {
         const { tracks, isShowAr = true } = this.props
-        console.log(tracks)
+        console.log(this.state.dataSource)
         return (
             <div className="music-details-content">
                 <p className="play-all-btn">播放全部({tracks.length})</p>
                 <ul className="song-container">
-                    <Table dataSource={this.state.dataSource} columns={this.state.columns}></Table>
+                    <Table dataSource={this.state.dataSource} columns={this.state.columns}
+                    pagination={false} ></Table>
                 </ul>
             </div>
         )

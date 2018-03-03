@@ -6,14 +6,30 @@ import './musiclist.less'
 class MusicList extends Component {
     componentDidMount() {
         const { dispatch, music } = this.props
-        const limit = 24, pagenum = 1;
-        dispatch(musicActions.getMusicList(limit, pagenum))
+        const {limit, pageNum, musicList, scrollPoint} = music
+        if (!musicList.length) {
+            dispatch(musicActions.getMusicList(limit, pageNum))
+        }
+        this.contentNode.scrollTop = scrollPoint
+    }
+    handleScroll = () => {
+        const {
+            scrollTop,
+            clientHeight,
+            scrollHeight,
+          } = this.contentNode
+        const {dispatch, music:{isFetching}} = this.props
+        if (scrollTop + clientHeight === scrollHeight && !isFetching) {
+            const { pageNum, limit } = this.props.music
+            dispatch(musicActions.getMusicList(limit, pageNum))
+          }
+        // console.log(this.contentNode)
     }
     render() {
         const { musicList } = this.props.music
-        console.log(musicList)
         return (
-            <div className="music-list">
+            <div className="music-list" ref={(node) => this.contentNode = node}
+                onScroll={this.handleScroll} >
                 <div className="wrap">
                     {
                         musicList.map((music, index) => {

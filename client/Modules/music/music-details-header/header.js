@@ -119,7 +119,6 @@ class Header extends Component {
           name,
           coverImgUrl,
         }
-        // this.props.star(parseList)
       };
 }
 export default Header

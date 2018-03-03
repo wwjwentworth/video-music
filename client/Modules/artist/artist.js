@@ -1,0 +1,47 @@
+import React, {Component} from 'react'
+import { connect } from 'react-redux'
+
+import * as artistActions from './artist.action'
+import ArtistHeader from './artist-header/header'
+import ArtistContent from './artist-content/content'
+
+import './artist.less'
+class Artist extends Component {
+    componentDidMount() {
+        const {dispatch, match:{params:{artistID}}} = this.props
+        dispatch(artistActions.getArtistList(artistID))
+    }
+    renderArtistInfo = (artistList) => {
+        if(artistList === null) return null;
+        else {
+            const {artist, hotSongs} = artistList
+            return (
+                <div className="artist-info">
+                    <ArtistHeader artist={artist} />
+                    <ArtistContent hotSongs={hotSongs}/>
+                </div>
+            )
+        }
+    }
+    render() {
+        const {isFetching, artistList} = this.props.artist
+        console.log(this.props)
+        return(
+            <div className="artist-page">
+                {
+                    !isFetching ? 
+                    <div className="wrap">
+                        {this.renderArtistInfo(artistList)}
+                    </div>
+                    :null
+                }
+            </div>
+        )
+    }
+}
+function mapStateToProps({ artist }) {
+    return {
+        artist
+    }
+}
+export default connect(mapStateToProps)(Artist)

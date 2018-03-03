@@ -7,6 +7,7 @@ import {header} from './components/header/header.reducer'
 import {video} from './Modules/video/video.reducer'
 import {music} from './Modules/music/music.reducer'
 import {player} from './Modules/player/player.reducer'
+import {artist} from './Modules/artist/artist.reducer'
 const rootReducer = combineReducers({
     home,
     carousel,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     header,
     video,
     music,
-    player
+    player,
+    artist
 })
 
 export default rootReducer

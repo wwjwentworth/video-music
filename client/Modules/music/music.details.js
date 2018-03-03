@@ -1,25 +1,26 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import * as musicActions from './music.action'
 
-import DetailsHeader from './music-details-header/header'
-import DetailsContent from './music-details-song-list/content'
+import MusicDetailsHeader from './music-details-header/header'
+import MusicDetailsContent from './music-details-song-list/content'
 class MusicDetails extends Component {
     componentDidMount() {
-        const {dispatch, match:{params:{musicID}}} = this.props
+        const { dispatch, match: { params: { musicID } } } = this.props
         dispatch(musicActions.getMusicDetails(musicID))
     }
     render() {
-        const {musicDetails} = this.props.music
-        return(
+        const { musicDetails } = this.props.music
+        return (
             <div className="wwj-music-details">
-                <DetailsHeader playlist={musicDetails.playlist}></DetailsHeader>
-                {
-                    musicDetails.playlist ? 
-                    <DetailsContent tracks={musicDetails.playlist.tracks}></DetailsContent> : null
-                }
-                
+                <div className="wrap">
+                    <MusicDetailsHeader playlist={musicDetails.playlist} />
+                    {
+                        musicDetails.playlist ?
+                        <MusicDetailsContent tracks={musicDetails.playlist.tracks}/> : null
+                    }
+                </div>
             </div>
         )
     }
