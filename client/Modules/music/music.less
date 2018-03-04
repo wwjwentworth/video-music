@@ -1,8 +1,19 @@
+@header-bg-color:#333232;
+@font-color:#3bc29b;
 .wwj-music{
     height: calc(~"100% - 1rem");
     .tabs{
         width: 100%;
         height: 100%;
+        .ant-tabs-nav .ant-tabs-tab:hover{
+            color: @font-color;
+        }
+        .ant-tabs-nav .ant-tabs-tab-active{
+            color: @font-color;
+        }
+        .ant-tabs-ink-bar{
+            background-color: @font-color;
+        }
         .ant-tabs-content{
             height: calc(~"100% - 44px");
         }

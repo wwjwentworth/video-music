@@ -18,7 +18,7 @@ class Content extends Component {
             render: (sequence) => {
                 return (
                     <div className="sequence">
-                        <Icon type="heart-o" />{sequence}
+                        {sequence}
                     </div>
                 )
             },

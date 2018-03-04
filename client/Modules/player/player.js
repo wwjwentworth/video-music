@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { formatDuration } from '../../common/util'
+import { formatDuration, formatCurrentTime } from '../../common/util'
 import { Button, Icon } from 'antd'
 
 import './player.less'
@@ -16,6 +16,7 @@ class Player extends Component {
         mode: 'listloop',
         modeIcon: 'icon-loop2',
         showReadyList: false,
+        showPlayBtn: false
     }
     componentDidMount() {
         console.log(this.props.player)
@@ -26,8 +27,14 @@ class Player extends Component {
     togglePlay = () => {
         if (this.audio.paused || this.audio.ended) {
             this.toPlay()
+            this.setState({
+                showPlayBtn: !this.state.showPlayBtn
+            })
         } else {
             this.toPause()
+            this.setState({
+                showPlayBtn: !this.state.showPlayBtn
+            })
         }
     }
     nextSong = () => {
@@ -54,17 +61,26 @@ class Player extends Component {
         this.audio.volume = scale
         let volumeIcon
         if (scale > 0 && scale < 0.4) {
-          volumeIcon = 'icon-volume-low'
+            volumeIcon = 'icon-volume-low'
         } else if (scale >= 0.4 && scale < 0.6) {
-          volumeIcon = 'icon-volume-medium'
+            volumeIcon = 'icon-volume-medium'
         } else if (scale >= 0.6 && scale <= 1) {
-          volumeIcon = 'icon-volume-high'
+            volumeIcon = 'icon-volume-high'
         }
         this.setState({
-          volumeIcon,
-          curVolBarWidth: `${distance}px`,
+            volumeIcon,
+            curVolBarWidth: `${distance}px`,
         })
-      };
+    };
+    syncTime = () => {
+        const progressBarWidth = this.progressBar.offsetWidth
+        const { song } = this.props.player
+        const timeScale = (this.audio.currentTime * 1000) / song.dt
+        this.setState({
+            curProgressBarWidth: `${progressBarWidth * timeScale}px`,
+            cdt: formatCurrentTime(this.audio.currentTime),
+        })
+    }
     render() {
         const {
             ppIcon,
@@ -80,11 +96,18 @@ class Player extends Component {
                 {this.renderAlbumImg(song)}
                 <div className="player-btns">
                     <Button className="pre-btn" onClick={this.preSong}>
-                        <Icon type="step-backward" className="step"/>
+                        <Icon type="step-backward" className="step" />
                     </Button>
-                    <Button className="pp-btn" onClick={this.togglePlay}><Icon type="caret-right" /></Button>
+                    {
+                        !this.state.showPlayBtn ?
+                            <Button className="pp-btn" onClick={this.togglePlay}><Icon type="caret-right" /></Button> : null
+                    }
+                    {
+                        this.state.showPlayBtn ?
+                            <Button className="pp-btn" onClick={this.togglePlay}><Icon type="pause" /></Button> : null
+                    }
                     <Button className="next-icon" onClick={this.nextSong}>
-                        <Icon type="step-forward" className="step"/>
+                        <Icon type="step-forward" className="step" />
                     </Button>
                 </div>
                 <div className="player-state">

@@ -5,7 +5,6 @@ import * as artistActions from './artist.action'
 import * as headerActions from '../../components/header/header.action'
 
 import ArtistHeader from './artist-header/header'
-
 import ArtistContent from './artist-content/content'
 import Player from '../player/player'
 

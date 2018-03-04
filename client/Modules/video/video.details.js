@@ -8,6 +8,7 @@ class VideoDetails extends Component {
     componentDidMount() {
         const {match, dispatch} = this.props
         const {videoID} = match.params
+        dispatch(headerActions.refresh())
         dispatch(videoActions.getVideoDetails(videoID))
     }
     render() {
@@ -34,6 +35,9 @@ class VideoDetails extends Component {
                         !loading&&
                         <p>{details.details}</p>
                     }
+                </div>
+                <div className="comment">
+                    111
                 </div>
             </div>
         )

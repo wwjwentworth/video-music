@@ -8,7 +8,6 @@ import Artist from '../../Modules/artist/artist'
 // import Login from '../../Modules/Login/Login'
 // import Register from '../../Modules/Register/Register'
 import Header from '../../components/header/header'
-import Footer from '../../components/footer/footer'
 import './App.less'
 import videoDetails from '../../Modules/video/video.details';
 import musicDetails from '../../Modules/music/music.details'

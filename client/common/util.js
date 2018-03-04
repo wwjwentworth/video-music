@@ -10,3 +10,11 @@ export const formatDuration = (ms) => {
     const sec = parseInt(duration - (min * 60), 10)
     return `${specIndex(min)}:${specIndex(sec)}`
 }
+
+export const formatCurrentTime = (cdt) => {
+    let min = parseInt(cdt / 60, 10)
+    let sec = parseInt(cdt - (min * 60), 10)
+    min = specIndex(min)
+    sec = specIndex(sec)
+    return `${min}:${sec}`
+}
