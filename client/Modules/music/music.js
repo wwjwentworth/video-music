@@ -10,7 +10,8 @@ const TabPane = Tabs.TabPane;
 class Music extends Component {
     
     componentDidMount() {
-        
+        const {dispatch} = this.props
+        dispatch(headerActions.refresh())
     }
     
     render() {
@@ -23,7 +24,7 @@ class Music extends Component {
                         <MusicList></MusicList>
                     </TabPane>
                 </Tabs>
-                
+                <Player></Player>
             </div>
         )
     }

@@ -5,6 +5,7 @@ import * as musicActions from './music.action'
 
 import MusicDetailsHeader from './music-details-header/header'
 import MusicDetailsContent from './music-details-song-list/content'
+import Player from '../player/player'
 class MusicDetails extends Component {
     componentDidMount() {
         const { dispatch, match: { params: { musicID } } } = this.props
@@ -20,7 +21,9 @@ class MusicDetails extends Component {
                         musicDetails.playlist ?
                         <MusicDetailsContent tracks={musicDetails.playlist.tracks}/> : null
                     }
+
                 </div>
+                <Player></Player>
             </div>
         )
     }

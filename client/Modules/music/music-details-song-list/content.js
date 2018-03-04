@@ -40,8 +40,7 @@ class Content extends Component {
             render:(artist) => {
                 return(
                     <div className="artist">
-                        <Icon type="plus-circle"/>
-                        <Link to={`/artist/${artist[0].id}`}>{artist[0].name}</Link>
+                        <Link to={`artist/${artist[0].id}`}>{artist[0].name}</Link>
                     </div>
                 )
             }

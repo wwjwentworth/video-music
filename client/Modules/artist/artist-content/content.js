@@ -1,6 +1,10 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux'
 import {formatDuration, specIndex} from '../../../common/util'
 import {Table, Icon} from 'antd'
+
+import * as playerActions from '../../player/player.action'
+import './content.less'
 class Content extends Component {
     state = {
         dataSource: [],
@@ -11,7 +15,7 @@ class Content extends Component {
             render: (sequence) => {
                 return (
                     <div className="sequence">
-                        <Icon type="heart-o" />{sequence}
+                        {sequence}
                     </div>
                 )
             },
@@ -22,17 +26,16 @@ class Content extends Component {
             render: (name, song) => {
                 return (
                     <div className="name">
-                        <Icon type="caret-right" onClick={() => this.playSong(this.props.tracks[song.key])}/>{name}
+                        {name}
                     </div>
                 )
             },
         }, {
             title: '操作',
-            render:() => {
+            render:(song) => {
                 return(
-                    <div className="artist">
-                        <Icon type="plus-circle"/>
-                        <Icon type="caret-right" onClick={() => this.playSong(this.props.tracks[song.key])}/>{name}
+                    <div className="operation">
+                        <Icon type="caret-right" onClick={() => this.playSong(song)}/>
                     </div>
                 )
             }
@@ -47,18 +50,30 @@ class Content extends Component {
         }]
     }
     componentDidMount() {
+        const { hotSongs} = this.props
         let dataSource = []
-        this.props.hotSongs.map((track, index) => {
+        hotSongs.map((track, index) => {
             dataSource.push({
                 sequence:specIndex(index),
                 name:track.name,
                 album:track.al.name,
-                time:formatDuration(track.dt)
+                time:formatDuration(track.dt),
+                key:index
             })
         })
         this.setState({
             dataSource:dataSource
         })
+    }
+    toggleLikeColor = () => {
+        this.setState({
+            likeColor:!this.state.likeColor
+        })
+    }
+    playSong = (song) => {
+        const {dispatch, hotSongs} = this.props
+        dispatch(playerActions.playSong(hotSongs[song.key]))
+        console.log(song)
     }
     render() {
          const { tracks, isShowAr = true } = this.props.hotSongs
@@ -70,4 +85,10 @@ class Content extends Component {
         )
     }
 }
-export default Content
+function mapStateToProps({ header, music }) {
+    return {
+        header,
+        music
+    }
+}
+export default connect(mapStateToProps)(Content)
