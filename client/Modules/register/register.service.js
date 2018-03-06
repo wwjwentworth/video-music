@@ -1,8 +1,13 @@
 import { message, notification } from 'antd'
 import axios from 'axios'
-import qs from 'qs'
+
+const API_PREFIX = 'http://localhost:3000'
+
 export function register(info) {
-    return axios.post(`http://localhost:3000/register`,JSON.stringify(info))
+    return axios.post(`${API_PREFIX}/register`,info)
+}
+export function isRepeatName(username) {
+    return axios.post(`${API_PREFIX}/isRepeatName`, username)
 }
 export function showMessage(type, content) {
     return message[type](content)

@@ -6,13 +6,15 @@ import {video} from './Modules/video/video.reducer'
 import {music} from './Modules/music/music.reducer'
 import {player} from './Modules/player/player.reducer'
 import {artist} from './Modules/artist/artist.reducer'
+import {register} from './Modules/register/register.reducer'
 const rootReducer = combineReducers({
     carousel,
     header,
     video,
     music,
     player,
-    artist
+    artist,
+    register
 })
 
 export default rootReducer

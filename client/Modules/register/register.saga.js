@@ -5,9 +5,19 @@ function* handleRegister() {
     while(true) {
         try {
             const {payload} = yield take(registerActions.REGISTER)
-            console.log(111)
-            const t = yield call(registerService.register, payload)
-            console.log(t)
+            yield call(registerService.register, payload)
+        } catch (err) {
+            fork(handleRegisterErr, err)
+        }
+    }
+}
+
+function* handleIspeatName() {
+    while(true) {
+        try {
+            const {payload} = yield take(registerActions.IS_REPEAT_NAME)
+            const {data} = yield call(registerService.isRepeatName, payload)
+            yield put(registerActions.isRepeatNameDone(data))
         } catch (err) {
             fork(handleRegisterErr, err)
         }
@@ -18,6 +28,7 @@ function* handleRegisterErr(err) {
 }
 export default function* registerSaga() {
     yield all([
-        fork(handleRegister)
+        fork(handleRegister),
+        fork(handleIspeatName)
     ])
 }
