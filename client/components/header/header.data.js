@@ -1,13 +1,9 @@
 export const nav_links = [{
-    path: '/home',
-    text: 'HOME',
-    active: true
-}, {
     path: '/video',
     text: 'VIDEO',
     active: false
 }, {
-    path: '/music',
+    path: '/',
     text: 'MUSIC',
     active: false
 }, {
