@@ -1,11 +1,17 @@
-export const ADD_ACTIVE = 'ADD_ACTIVE'
-export function addActive(payload) {
+export const CHANGE_PAGE = 'CHANGE_PAGE'
+export function changePage(payload) {
     return {
-        type:ADD_ACTIVE,
+        type:CHANGE_PAGE,
         payload
     }
 }
-
+export const CHANGE_PAGE_DONE = 'CHANGE_PAGE_DONE'
+export function changePageDone(payload) {
+    return {
+        type:CHANGE_PAGE_DONE,
+        payload
+    }
+}
 export const REFRESH = 'REFRESH'
 export function refresh(href) {
     return {
@@ -14,10 +20,15 @@ export function refresh(href) {
     }
 }
 
-export const ERRORS = 'ERRORS'
-export function errors(payload) {
+export const SET_USER = 'SET_USER'
+export function setUser() {
     return {
-        type:ERRORS,
-        payload
+        type:SET_USER
+    }
+}
+export const REMOVE_COOKIE = 'REMOVE_COOKIE'
+export function removeCookie() {
+    return {
+        type:REMOVE_COOKIE
     }
 }

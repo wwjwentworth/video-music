@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Video from '../../Modules/video/video'
 import Music from '../../Modules/music/music'
 import Artist from '../../Modules/artist/artist'
-// import Community from '../../Modules/Community/Community'
+import Community from '../../Modules/community/community'
 import Login from '../../Modules/login/login'
 import Register from '../../Modules/register/register'
 import Header from '../../components/header/header'
@@ -13,7 +13,7 @@ import musicDetails from '../../Modules/music/music.details'
 class App extends Component {
     render() {
         return (
-            <BrowserRouter>
+            <BrowserRouter >
                 <div className="app">
                     <Header></Header>
                     <Switch>
@@ -25,6 +25,7 @@ class App extends Component {
                         <Route exact path='/music/artist/:artistID' component={Artist}/>
                         <Route exact path='/register' component={Register} />
                         <Route exact path='/login' component={Login} />
+                        <Route exact path='/community' component={Community} />
                     </Switch>
                 </div>
             </BrowserRouter>

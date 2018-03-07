@@ -1,7 +1,6 @@
 import { take, put, fork, call, select, cancel, all } from 'redux-saga/effects'
 import * as musicService from './music.service'
 import * as musicActions from './music.action'
-
 function* handleGetMusicList() {
     while(true) {
         try {
@@ -25,6 +24,7 @@ function* handleGetMusicDetails() {
         }
     }
 }
+
 
 
 function* handleMusicErr(err) {

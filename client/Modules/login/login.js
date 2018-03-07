@@ -1,18 +1,35 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Form, Input, Icon, Checkbox, Button } from 'antd'
+import { Form, Input, Icon, Checkbox, Button, notification } from 'antd'
 import './login.less'
 import cookie from 'react-cookies';
+import * as headerActions from '../../components/header/header.action'
+import * as loginActions from './login.action'
 const FormItem = Form.Item
 class LoginForm extends Component {
+    componentDidMount() {
+        const {dispatch} = this.props;
+        dispatch(headerActions.refresh())
+    }
     handleSubmit = (e) => {
         e.preventDefault();
+        const {dispatch, history} = this.props
         this.props.form.validateFields((err, values) => {
           if (err || !values.username || !values.password) {
               return
           }
-          cookie.save("username", values.username)
-          console.log(cookie.load("username"))
+          dispatch(loginActions.loginRequest(values, {
+              resolve:(user) => {
+                cookie.save("user", user.username)
+                history.push("/music")
+              },
+              reject:() => {
+                  notification.error({
+                      "message":"登录失败"
+                  })
+              }
+          }))
+          
         });
     }
     render() {
@@ -53,10 +70,9 @@ class LoginForm extends Component {
     }
 }
 const Login = Form.create()(LoginForm);
-function mapStateToProps({ login, header }) {
+function mapStateToProps({ login:{currentUser}}) {
     return {
-        login,
-        header
+        currentUser,
     }
 }
 export default connect(mapStateToProps)(Login)

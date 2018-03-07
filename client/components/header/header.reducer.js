@@ -1,41 +1,52 @@
 import * as headerActions from './header.action'
 import logo_img from '../../assets/logo.png'
 import banner_img from '../../assets/bg.jpg'
-import {nav_links} from './header.data'
 export function header(state = {
     img: {
         logo: logo_img
     },
-    nav_links: nav_links,
+    nav: [{
+        path: '/video',
+        text: 'VIDEO',
+        active: false
+    }, {
+        path: '/music',
+        text: 'MUSIC',
+        active: false
+    }, {
+        path: '/community',
+        text: 'COMMUNITY',
+        active: false
+    }, {
+        path: '/login',
+        text: 'LOGIN',
+        active: false
+    }, {
+        path: '/register',
+        text: 'REGISTER',
+        active: false
+    }]
 }, action) {
-    let nav_links = state.nav_links.concat();
     switch (action.type) {
-        case headerActions.ADD_ACTIVE:
-            //nav_links = state.nav_links
-            //一定要进行深复制
-            for (let i = 0; i < nav_links.length; i++) {
-                nav_links[i].active = false;
-            }
-            nav_links[action.payload].active = true;
-            return Object.assign({}, state, {
-                nav_links: nav_links,
-            })
-        case headerActions.REFRESH:
-            for (let i = 0; i < nav_links.length; i++) {
-                nav_links[i].active = false;
-            }
-            for(let i = 0; i < nav_links.length; i++) {
-                if(window.location.href.indexOf(nav_links[i].path) > 0) {
-                    nav_links[i].active = true;
-                }
-            }
-            return Object.assign({}, state, {
-                nav_links:nav_links
-            })
-        case headerActions.ERRORS:
+        case headerActions.CHANGE_PAGE_DONE:
             return {
                 ...state,
-                errors:action.payload
+                nav:action.payload
+            }
+        case headerActions.REFRESH:
+            return{
+                ...state
+            }
+        case headerActions.SET_USER:
+            let nav = state.nav.concat()
+            nav.splice(3, 4) 
+            return{
+                ...state,
+                nav:nav
+            }
+        case headerActions.REMOVE_COOKIE:
+            return {
+                ...state
             }
         default:
             return state

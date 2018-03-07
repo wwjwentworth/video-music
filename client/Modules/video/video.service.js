@@ -1,6 +1,6 @@
 import { message, notification } from 'antd'
 import axios from 'axios'
-const API_PREFIX = 'http://localhost:3000'
+const API_PREFIX = 'http://localhost:4000'
 export function getBannerList() {
    return axios.get(`${API_PREFIX}/videos_banner`)
 }

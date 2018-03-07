@@ -7,7 +7,7 @@ import * as headerActions from '../../components/header/header.action';
 import './video.less'
 class Videos extends Component {
     componentDidMount() {
-        const {dispatch} = this.props
+        const { dispatch } = this.props
         this.getBannerList()
         dispatch(headerActions.refresh())
     }
@@ -104,9 +104,9 @@ class Videos extends Component {
     }
 
     renderCutList = (state) => {
-        const {loading, cutList, imgs} = state
-        if(!loading) {
-            return(
+        const { loading, cutList, imgs } = state
+        if (!loading) {
+            return (
                 <div className="cut">
                     <p className="title">Cut混剪</p>
                     <ul className="list-wrap">
@@ -117,7 +117,7 @@ class Videos extends Component {
                                         key={index}>
                                         <div className="left" >
                                             <div className="wrap"></div>
-                                            <img src={item.img} className="post"/>
+                                            <img src={item.img} className="post" />
                                             <img src={imgs.play_img}
                                                 onClick={() => {
                                                     this.linkToDetails(item._id)
@@ -137,20 +137,19 @@ class Videos extends Component {
                 </div>
             )
         } else {
-            return(
+            return (
                 <div className="cut">
                     <ul className="list-wrap">
-                        <li className="list-item">
-                            <div className="loading">
-                                <div></div>
-                                <p>loading</p>
-                            </div>
+                        <div className="loading">
+                            <div></div>
+                            <p>loading</p>
+                        </div><li className="list-item">
                         </li>
                     </ul>
                 </div>
             )
         }
-        
+
     }
 }
 
