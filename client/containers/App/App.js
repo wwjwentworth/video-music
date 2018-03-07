@@ -4,7 +4,7 @@ import Video from '../../Modules/video/video'
 import Music from '../../Modules/music/music'
 import Artist from '../../Modules/artist/artist'
 // import Community from '../../Modules/Community/Community'
-// import Login from '../../Modules/Login/Login'
+import Login from '../../Modules/login/login'
 import Register from '../../Modules/register/register'
 import Header from '../../components/header/header'
 import './App.less'
@@ -24,6 +24,7 @@ class App extends Component {
                         <Route exact path='/music/:musicID' component={musicDetails}/>
                         <Route exact path='/music/artist/:artistID' component={Artist}/>
                         <Route exact path='/register' component={Register} />
+                        <Route exact path='/login' component={Login} />
                     </Switch>
                 </div>
             </BrowserRouter>

@@ -75,13 +75,6 @@ class RegistrationForm extends Component {
                             )}
                     </FormItem>
                     <FormItem>
-                        {getFieldDecorator('remember', {
-                            valuePropName: 'checked',
-                            initialValue: true,
-                        })(
-                            <Checkbox>Remember me</Checkbox>
-                        )}
-                        <a className="forget-password">忘记密码</a>
                         <Button type="primary" htmlType="submit"
                             disabled={isRepeatName} >
                             注册
