@@ -54,7 +54,7 @@ class Community extends Component {
                                         </div> : null
                                     }
                                     <div className="operation">
-                                        <div className="like"><Icon type="like-o" onClick={() => this.thumbUp(index)}/>点赞</div>
+                                        <div className="like"><Icon type="like-o" onClick={() => this.thumbUp(community)}/>点赞({community.like})</div>
                                         <div className="form"><Icon type="form" />评论</div>
                                         <div className="fork"><Icon type="fork" />分享</div>
                                     </div>

@@ -7,6 +7,9 @@ export function getCommunityData() {
 export function saveCommunity(data) {
     return axios.post(`${API_PREFIX}/community`, data)
 }
+export function updateCommunityList(id, info) {
+    return axios.put(`${API_PREFIX}/update/${id}`, info)
+}
 export function showMessage(type, content) {
     message[type](content)
 }

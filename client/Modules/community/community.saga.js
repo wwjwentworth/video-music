@@ -18,14 +18,12 @@ function* handleThumbUp() {
     while(true) {
         try {
             const {payload} = yield take(communityActions.THUMB_UP)
-            const communityList = yield select(selectCommunityList)
-            communityList.map((community, index) =>{
-                if(index === payload) {
-                    community.like++;
-                }
-            })
-            yield call(communityService.saveCommunityList, communityList)
-            yield put(communityActions.thumbUpDone(communityList))
+            const thumbUpCount = payload.like + 1;
+            const mergeInfo = {
+                "like":thumbUpCount
+            }
+            const {data} = yield call(communityService.updateCommunityList, payload._id, mergeInfo)
+            yield put(communityActions.thumbUpDone(data))
         } catch (err) {
             fork(handleCommunityErr, err)
         }
