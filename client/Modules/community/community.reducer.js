@@ -1,17 +1,22 @@
 import * as communityActions from './community.action'
 export function community(state = {
-    communityList:[]
+    communityList: []
 }, action) {
-    switch(action.type) {
+    switch (action.type) {
         case communityActions.GET_COMMUNITY_DATA_DONE:
-            return{
+            return {
                 ...state,
-                communityList:action.payload
+                communityList: action.payload
             }
         case communityActions.THUMB_UP_DONE:
-            return{
+            return {
                 ...state,
-                communityList:action.payload
+                communityList: action.payload
+            }
+        case communityActions.COMMENT_DONE:
+            return {
+                ...state,
+                communityList: action.payload
             }
         default:
             return state

@@ -29,3 +29,19 @@ export function thumbUpDone(payload) {
         payload
     }
 }
+
+export const COMMENT = 'COMMENT'
+export function comment( community) {
+    return{
+        type:COMMENT,
+        community
+    }
+}
+
+export const COMMENT_DONE = 'COMMENT_DONE'
+export function commentDone(payload) {
+    return{
+        type:COMMENT_DONE,
+        payload
+    }
+}

@@ -29,12 +29,26 @@ function* handleThumbUp() {
         }
     }
 }
+
+function* handleComment() {
+    while(true) {
+        try {
+            const { community} = yield take(communityActions.COMMENT)
+            
+            const {data} = yield call(communityService.updateCommunityList, community._id, {"comment":community.comment})
+            yield put(communityActions.commentDone(data))
+        } catch (err) {
+            fork(handleCommunityErr, err)
+        }
+    }
+}
 function* handleCommunityErr(err) {
     yield call(communityService.showMessage, err)
 }
 export default function* communitySaga() {
     yield all([
         fork(handleGetCommunityData),
-        fork(handleThumbUp)
+        fork(handleThumbUp),
+        fork(handleComment)
     ])
 }
