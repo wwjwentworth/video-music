@@ -1,13 +1,33 @@
 import { take, put, fork, call, select, cancel, all } from 'redux-saga/effects'
 import * as communityService from './community.service'
 import * as communityActions from './community.action'
-function* handleShareSong() {
+const selectCommunityList = state => state.community.communityList
+
+function* handleGetCommunityData() {
     while(true) {
         try {
-            const {payload} = yield take(communityActions.SHARE_SONG)
-            yield put(communityActions.shareSongDone(payload))
+            yield take(communityActions.GET_COMMUNITY_DATA)
+            const {data} = yield call(communityService.getCommunityData, '')
+            yield put(communityActions.getCommunityDataDone(data))
         } catch (err) {
-            fork(handleMusicErr, err)
+            fork(handleCommunityErr, err)
+        }
+    }
+}
+function* handleThumbUp() {
+    while(true) {
+        try {
+            const {payload} = yield take(communityActions.THUMB_UP)
+            const communityList = yield select(selectCommunityList)
+            communityList.map((community, index) =>{
+                if(index === payload) {
+                    community.like++;
+                }
+            })
+            yield call(communityService.saveCommunityList, communityList)
+            yield put(communityActions.thumbUpDone(communityList))
+        } catch (err) {
+            fork(handleCommunityErr, err)
         }
     }
 }
@@ -16,6 +36,7 @@ function* handleCommunityErr(err) {
 }
 export default function* communitySaga() {
     yield all([
-      fork(handleShareSong)
+        fork(handleGetCommunityData),
+        fork(handleThumbUp)
     ])
 }

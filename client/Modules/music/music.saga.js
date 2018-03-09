@@ -26,7 +26,16 @@ function* handleGetMusicDetails() {
 }
 
 
-
+function* handleShareSong() {
+    while(true) {
+        try {
+            const {payload} = yield take(musicActions.SHARE_SONG)
+            yield call(musicService.postMusicData, payload)
+        } catch (err) {
+            fork(handleMusicErr, err)
+        }
+    }
+}
 function* handleMusicErr(err) {
     yield call(musicService.showMessage, 'error', err)
 }
@@ -34,5 +43,6 @@ export default function* videoSaga() {
     yield all([
       fork(handleGetMusicList),
       fork(handleGetMusicDetails),
+      fork(handleShareSong)
     ])
 }

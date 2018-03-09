@@ -1,15 +1,17 @@
 import * as communityActions from './community.action'
 export function community(state = {
-    musicList:[],
-    videoList:[]
+    communityList:[]
 }, action) {
     switch(action.type) {
-        case communityActions.SHARE_SONG_DONE:
-            let musicList = state.musicList.concat()
-            musicList.push(action.payload)
+        case communityActions.GET_COMMUNITY_DATA_DONE:
             return{
                 ...state,
-                musicList:musicList
+                communityList:action.payload
+            }
+        case communityActions.THUMB_UP_DONE:
+            return{
+                ...state,
+                communityList:action.payload
             }
         default:
             return state

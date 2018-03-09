@@ -1,15 +1,31 @@
-export const SHARE_SONG = 'SHARE_SONG'
-export function shareSong(payload) {
+export const GET_COMMUNITY_DATA = 'GET_COMMUNITY_DATA'
+export function getCommunityData(payload) {
     return{
-        type:SHARE_SONG,
+        type:GET_COMMUNITY_DATA,
         payload
     }
 }
 
-export const SHARE_SONG_DONE = 'SHARE_SONG_DONE'
-export function shareSongDone(payload) {
+export const GET_COMMUNITY_DATA_DONE = 'GET_COMMUNITY_DATA_DONE'
+export function getCommunityDataDone(payload) {
     return{
-        type:SHARE_SONG_DONE,
+        type:GET_COMMUNITY_DATA_DONE,
+        payload
+    }
+}
+
+export const THUMB_UP = 'THUMB_UP'
+export function thumbUp(payload) {
+    return{
+        type:THUMB_UP,
+        payload
+    }
+}
+
+export const THUMB_UP_DONE = 'THUMB_UP_DONE'
+export function thumbUpDone(payload) {
+    return{
+        type:THUMB_UP_DONE,
         payload
     }
 }

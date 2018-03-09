@@ -31,3 +31,10 @@ export function getMusicDetailsDone(payload) {
     }
 }
 
+export const SHARE_SONG = 'SHARE_SONG'
+export function shareSong(payload) {
+    return {
+        type:SHARE_SONG,
+        payload
+    }
+}

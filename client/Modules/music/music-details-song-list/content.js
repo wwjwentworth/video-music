@@ -89,9 +89,11 @@ class Content extends Component {
         const sharedSongInfo = {
             time: format(new Date(), FORMAT_TIME),
             user:cookie.load("user"),
-            song:song
+            song:song,
+            type:'music'
         }
-        dispatch(communityActions.shareSong(sharedSongInfo))
+        console.log(song)
+        dispatch(musicActions.shareSong(sharedSongInfo))
         history.push('/community')
     }
     render() {
