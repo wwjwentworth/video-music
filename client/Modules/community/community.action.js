@@ -45,3 +45,20 @@ export function commentDone(payload) {
         payload
     }
 }
+
+export const FORK = 'FORK'
+export function fork(forkInfo, community) {
+    return{
+        type:FORK,
+        forkInfo,
+        community
+    }
+}
+
+export const FORK_DONE = 'FORK_DONE'
+export function forkDone(payload) {
+    return{
+        type:FORK_DONE,
+        payload
+    }
+}

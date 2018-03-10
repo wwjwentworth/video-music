@@ -1,14 +1,30 @@
 .music-details-content{
     cursor: pointer;
+
     .song-container{
-        .anticon{
-            margin-right: 12px;
-        }
-        .artist{
-            a{
-                color: #000;
-                text-decoration: none;
+        .list-item{
+            color: #000;
+            display: flex;
+            justify-content: space-between;
+            height: 45px;
+            line-height: 45px;
+            padding-left: 12px;
+            &>p{
+                flex: 1;
             }
+            .operation{
+                flex: 2;
+                .anticon{
+                    margin-right: 6px;
+                }
+            }
+            .time{
+                text-align: right;
+                margin-right: 100px;
+            }
+        }
+        .active{
+            background-color: #f4f4f6;
         }
     }
 }

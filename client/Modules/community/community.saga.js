@@ -34,7 +34,6 @@ function* handleComment() {
     while(true) {
         try {
             const { community} = yield take(communityActions.COMMENT)
-            
             const {data} = yield call(communityService.updateCommunityList, community._id, {"comment":community.comment})
             yield put(communityActions.commentDone(data))
         } catch (err) {
@@ -42,6 +41,24 @@ function* handleComment() {
         }
     }
 }
+function* handleFork() {
+    while(true) {
+        try {
+            const {forkInfo, community} = yield take(communityActions.FORK)
+            const forkCount = community.fork + 1;
+            const mergeInfo = {
+                "fork":forkCount
+            }
+            const {data} = yield call(communityService.updateCommunityList, community._id, mergeInfo)
+            yield put(communityActions.forkDone(data))
+            const {data:{message}} = yield call(communityService.fork, forkInfo)
+            yield put(communityActions.getCommunityData())
+        } catch (err) {
+            fork(handleCommunityErr, err)
+        }
+    }
+}
+
 function* handleCommunityErr(err) {
     yield call(communityService.showMessage, err)
 }
@@ -49,6 +66,7 @@ export default function* communitySaga() {
     yield all([
         fork(handleGetCommunityData),
         fork(handleThumbUp),
-        fork(handleComment)
+        fork(handleComment),
+        fork(handleFork)
     ])
 }

@@ -10,6 +10,9 @@ export function saveCommunity(data) {
 export function updateCommunityList(id, info) {
     return axios.put(`${API_PREFIX}/update/${id}`, info)
 }
+export function fork(info) {
+    return axios.post(`${API_PREFIX}/community`, info)
+}
 export function showMessage(type, content) {
     message[type](content)
 }

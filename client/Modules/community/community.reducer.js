@@ -1,41 +1,52 @@
 import * as communityActions from './community.action'
 export function community(state = {
     communityList: [],
-    isloading:false
+    isloading: false
 }, action) {
     switch (action.type) {
         case communityActions.GET_COMMUNITY_DATA:
-            return{
+            return {
                 ...state,
-                isloading:true
+                isloading: true
             }
         case communityActions.GET_COMMUNITY_DATA_DONE:
             return {
                 ...state,
                 communityList: action.payload,
-                isloading:false
+                isloading: false
             }
         case communityActions.THUMB_UP:
-            return{
+            return {
                 ...state,
-                isloading:true,
+                isloading: true,
             }
         case communityActions.THUMB_UP_DONE:
             return {
                 ...state,
                 communityList: action.payload,
-                isloading:false
+                isloading: false
             }
         case communityActions.COMMENT:
-            return{
+            return {
                 ...state,
-                isloading:true,
+                isloading: true,
             }
         case communityActions.COMMENT_DONE:
             return {
                 ...state,
                 communityList: action.payload,
-                isloading:false
+                isloading: false
+            }
+        case communityActions.FORK:
+            return {
+                ...state,
+                isloading: true,
+            }
+        case communityActions.FORK_DONE:
+            return {
+                ...state,
+                communityList: action.payload,
+                isloading: false
             }
         default:
             return state

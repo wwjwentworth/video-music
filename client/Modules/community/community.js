@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Icon, Input, Button, Popconfirm, message } from 'antd'
+import cookie from 'react-cookies'
 import * as communityActions from './community.action'
 import * as playerActions from '../player/player.action'
 import Player from '../player/player'
@@ -11,7 +12,7 @@ const { TextArea } = Input;
 const FORMAT_TIME = 'YYYY-MM-DD HH:mm:ss'
 class Community extends Component {
     state = {
-        showCommentArea: false,
+        showCommentArea: -1,
         commentText: ''
     }
     componentDidMount() {
@@ -26,10 +27,16 @@ class Community extends Component {
         const { dispatch } = this.props
         dispatch(communityActions.thumbUp(community))
     }
-    toggleCommentArea = () => {
-        this.setState({
-            showCommentArea: !this.state.showCommentArea
-        })
+    toggleCommentArea = (index) => {
+        if (this.state.showCommentArea === index) {
+            this.setState({
+                showCommentArea: -1
+            })
+        } else {
+            this.setState({
+                showCommentArea: index
+            })
+        }
     }
     publishComment = (community) => {
         const { dispatch } = this.props
@@ -40,7 +47,6 @@ class Community extends Component {
             user: community.user,
             time: format(new Date(), FORMAT_TIME),
             text: this.state.commentText,
-
         })
         dispatch(communityActions.comment(community))
     }
@@ -49,6 +55,22 @@ class Community extends Component {
         community.comment.splice(index, 1)
         dispatch(communityActions.comment(community))
         message.success("评论已删除！")
+    }
+    fork = (community) => {
+        const { dispatch, history } = this.props
+        if (!cookie.load("user")) {
+            alert("222")
+        }
+        const forkInfo = {
+            user:cookie.load("user"),
+            time:format(new Date(), FORMAT_TIME),
+            fork:0,
+            like:0,
+            comment:[],
+            type:community.type,
+            song:community.song
+        }
+        dispatch(communityActions.fork(forkInfo, community))
     }
     render() {
         const { community } = this.props
@@ -90,11 +112,11 @@ class Community extends Component {
                                             }
                                             <div className="operation">
                                                 <div className="like"><Icon type="like-o" onClick={() => this.thumbUp(community)} />点赞({community.like})</div>
-                                                <div className="form"><Icon type="form" onClick={this.toggleCommentArea} />评论({community.comment.length})</div>
-                                                <div className="fork"><Icon type="fork" />分享</div>
+                                                <div className="form"><Icon type="form" onClick={() => this.toggleCommentArea(index)} />评论({community.comment.length})</div>
+                                                <div className="fork"><Icon type="fork" onClick={() => this.fork(community)} />分享({community.fork})</div>
                                             </div>
                                             {
-                                                this.state.showCommentArea ?
+                                                this.state.showCommentArea === index ?
                                                     <div className="comment-area">
                                                         <TextArea placeholder="发表评论" autosize={{ minRows: 2, maxRows: 6 }} value={this.state.commentText} onChange={(e) => this.setState({ commentText: e.target.value })} />
                                                         <div className="publish-btn">
@@ -115,7 +137,7 @@ class Community extends Component {
                                                                                 <Popconfirm title="确定删除此条评论？" onConfirm={() => this.deleteComment(community, index)} okText="确定" cancelText="取消">
                                                                                     <Icon type="delete" />
                                                                                 </Popconfirm>
-                                                                                
+
                                                                             </div>
                                                                         </div>
                                                                     )
