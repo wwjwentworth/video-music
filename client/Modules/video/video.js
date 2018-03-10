@@ -143,8 +143,7 @@ class Videos extends Component {
                         <div className="loading">
                             <div></div>
                             <p>loading</p>
-                        </div><li className="list-item">
-                        </li>
+                        </div>
                     </ul>
                 </div>
             )

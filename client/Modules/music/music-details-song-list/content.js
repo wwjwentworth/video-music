@@ -90,7 +90,10 @@ class Content extends Component {
             time: format(new Date(), FORMAT_TIME),
             user:cookie.load("user"),
             song:song,
-            type:'music'
+            type:'music',
+            fork:0,
+            like:0,
+            comment:[]
         }
         console.log(song)
         dispatch(musicActions.shareSong(sharedSongInfo))
