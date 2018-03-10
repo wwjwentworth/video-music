@@ -1,6 +1,7 @@
+
+@font-color:#3bc29b;
 .music-details-content{
     cursor: pointer;
-
     .song-container{
         .list-item{
             color: #000;
@@ -25,6 +26,38 @@
         }
         .active{
             background-color: #f4f4f6;
+        }
+    }
+}
+.vertical-center-modal {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.vertical-center-modal:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    width: 0;
+}
+
+.vertical-center-modal .ant-modal {
+    display: inline-block;
+    vertical-align: middle;
+    top: 0;
+    text-align: left;
+}
+.login-modal{
+    width: 260px !important;
+    .ant-modal-body{
+        display: flex;
+        justify-content: space-between;
+        &>button{
+            width: 80px;
+            background-color: @font-color;
+            border: none;
+            color: #fff;
         }
     }
 }

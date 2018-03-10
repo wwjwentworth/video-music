@@ -20,19 +20,19 @@ class RegistrationForm extends Component {
 
     }
     returnToLogin = () => {
-        const {history} = this.props
+        const { history } = this.props
         history.push('/login')
     }
     handleChange = (e) => {
-        const {dispatch} = this.props
-        dispatch(registerActions.isRepeatName({username:e.target.value}))
+        const { dispatch } = this.props
+        dispatch(registerActions.isRepeatName({ username: e.target.value }))
     }
     render() {
-        const { form:{getFieldDecorator}, register:{isRepeatName} } = this.props;
+        const { form: { getFieldDecorator }, register: { isRepeatName } } = this.props;
         return (
             <div className="wwj-register">
                 <Form onSubmit={this.handleSubmit}>
-                    <FormItem label="Username">
+                    <FormItem>
                         {getFieldDecorator('username', {
                             rules: [{
                                 required: true,
@@ -42,16 +42,17 @@ class RegistrationForm extends Component {
                                 message: "请输入6-16个有效字符！"
                             }],
                         })(
-                            <Input onBlur={(e) => this.handleChange(e)}/>
-                            
+                            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                placeholder="用户名"
+                                onBlur={(e) => this.handleChange(e)} />
                             )}
-                            {
-                                isRepeatName ?
-                                <p className="warn">111</p>:null
-                            }
-                            
+                        {
+                            isRepeatName ?
+                                <p className="warn">111</p> : null
+                        }
+
                     </FormItem>
-                    <FormItem label="Password">
+                    <FormItem>
                         {getFieldDecorator('password', {
                             rules: [{
                                 required: true, message: 'Please input your E-mail!',
@@ -60,10 +61,12 @@ class RegistrationForm extends Component {
                                 message: "请输入6-16个有效字符！"
                             }],
                         })(
-                            <Input />
+                            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                type="password"
+                                placeholder="密码" />
                             )}
                     </FormItem>
-                    <FormItem label="E-mail">
+                    <FormItem>
                         {getFieldDecorator('email', {
                             rules: [{
                                 required: true, message: 'Please input your E-mail!',
@@ -71,12 +74,14 @@ class RegistrationForm extends Component {
                                 type: 'email', message: '这不是一个有效的邮箱！',
                             }],
                         })(
-                            <Input />
+                            <Input prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                placeholder="邮箱" />
                             )}
                     </FormItem>
                     <FormItem>
                         <Button type="primary" htmlType="submit"
-                            disabled={isRepeatName} >
+                            disabled={isRepeatName}
+                            className="submit-btn" >
                             注册
                         </Button>
                         <a className="login" onClick={this.returnToLogin}>已有账号，登录</a>

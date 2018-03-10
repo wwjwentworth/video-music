@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { specIndex, formatDuration } from '../../../common/util'
-import { Table, Icon } from 'antd'
+import { Table, Icon, Modal, Button } from 'antd'
 import { format } from 'date-fns'
 import cookie from 'react-cookies'
 import ShareModal from '../../../components/shareModal/shareModal'
@@ -15,7 +15,8 @@ const FORMAT_TIME = 'YYYY-MM-DD HH:mm:ss'
 class Content extends Component {
     state = {
         dataSource: [],
-        visible: false
+        // visible: false,
+        showLoginModal:false
     }
     componentDidMount() {
         const { tracks } = this.props
@@ -42,7 +43,10 @@ class Content extends Component {
     shareSong = (song) => {
         const { dispatch, history } = this.props
         if (!cookie.load("user")) {
-            alert("222")
+            this.setState({
+                showLoginModal:true
+            })
+            return;
         }
         this.setState({
             visible: true
@@ -54,7 +58,8 @@ class Content extends Component {
             type: 'music',
             fork: 0,
             like: 0,
-            comment: []
+            comment: [],
+            text:''
         }
         dispatch(musicActions.shareSong(sharedSongInfo))
         history.push('/community')
@@ -91,7 +96,23 @@ class Content extends Component {
                         })
                     }
                 </ul>
-                <ShareModal visible={this.state.visible} />
+                <Modal
+                    title="请先登录您的账号!"
+                    wrapClassName="vertical-center-modal"
+                    visible={this.state.showLoginModal}
+                    onCancel={() => this.setState({showLoginModal:false})}
+                    footer = {null}
+                    className="login-modal"
+                    maskClosable={false}
+                >
+                    <Button>
+                        <Link to="/login">登录</Link>
+                    </Button>
+                    <Button>
+                        <Link to="/register">注册</Link>
+                    </Button>
+                    
+                </Modal>
             </div>
         )
     }
