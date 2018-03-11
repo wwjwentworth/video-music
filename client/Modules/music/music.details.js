@@ -13,17 +13,27 @@ class MusicDetails extends Component {
         dispatch(musicActions.getMusicDetails(musicID))
     }
     render() {
-        const { musicDetails } = this.props.music
+        const { musicDetails, isLoading } = this.props.music
         return (
             <div className="wwj-music-details">
-                <div className="wrap">
-                    <MusicDetailsHeader playlist={musicDetails.playlist} />
-                    {
-                        musicDetails.playlist ?
-                        <MusicDetailsContent tracks={musicDetails.playlist.tracks}/> : null
-                    }
+                {
+                    !isLoading ?
+                        <div className="wrap">
+                            <MusicDetailsHeader playlist={musicDetails.playlist} />
+                            {
+                                musicDetails.playlist ?
+                                    <MusicDetailsContent tracks={musicDetails.playlist.tracks} /> : null
+                            }
 
-                </div>
+                        </div> : null
+                }
+                {
+                    isLoading ?
+                        <div className="loading">
+                            <div></div>
+                            <p>loading</p>
+                        </div> : null
+                }
                 <Player></Player>
             </div>
         )

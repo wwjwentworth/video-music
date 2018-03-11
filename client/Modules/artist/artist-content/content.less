@@ -1,13 +1,29 @@
 .artist-content{
-    cursor: pointer;
-    .sequence{
-        .anticon{
-            margin-right: 6px;
+    .song-container{
+        .list-item{
+            color: #000;
+            display: flex;
+            justify-content: space-between;
+            height: 45px;
+            line-height: 45px;
+            padding-left: 12px;
+            &>p{
+                flex: 1;
+            }
+           .name{
+               .anticon{
+                   margin: 0 6px;
+                   cursor: pointer;
+               }
+            }
+            .time{
+                text-align: right;
+                margin-right: 100px;
+            }
+        }
+        .active{
+            background-color: #f4f4f6;
         }
     }
-    .operation{
-        .anticon{
-            margin-right: 24px;
-        }
-    }
+    
 }

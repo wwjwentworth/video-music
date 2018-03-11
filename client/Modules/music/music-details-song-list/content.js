@@ -15,8 +15,7 @@ const FORMAT_TIME = 'YYYY-MM-DD HH:mm:ss'
 class Content extends Component {
     state = {
         dataSource: [],
-        // visible: false,
-        showLoginModal:false
+        showLoginModal: false
     }
     componentDidMount() {
         const { tracks } = this.props
@@ -29,7 +28,7 @@ class Content extends Component {
                 album: track.al.name,
                 time: formatDuration(track.dt),
                 artist: track.ar,
-                track:track
+                track: track
             })
         })
         this.setState({
@@ -44,7 +43,7 @@ class Content extends Component {
         const { dispatch, history } = this.props
         if (!cookie.load("user")) {
             this.setState({
-                showLoginModal:true
+                showLoginModal: true
             })
             return;
         }
@@ -59,7 +58,7 @@ class Content extends Component {
             fork: 0,
             like: 0,
             comment: [],
-            text:''
+            text: ''
         }
         dispatch(musicActions.shareSong(sharedSongInfo))
         history.push('/community')
@@ -73,18 +72,20 @@ class Content extends Component {
                     {
                         this.state.dataSource.map((data, index) => {
                             return (
-                                <li key={index} className={index % 2 === 0 ? 'list-item active':'list-item'}>
-                                    <p>{data.sequence}</p>
-                                    <p className="operation">
+                                <li key={index} className={index % 2 === 0 ? 'list-item active' : 'list-item'}>
+                                    <p className="name">
+                                        {data.sequence}
                                         <Icon type="caret-right" onClick={() => this.playSong(data.track)} />
                                         <Icon type="share-alt" onClick={() => this.shareSong(data.track)} />
                                         {data.name}
                                     </p>
-                                    <p>
+                                    <p className="artist">
                                         {
                                             data.artist.map((ar, index) => {
                                                 return (
-                                                    <span key={index}>{ar.name}</span>
+                                                    <span key={index}>
+                                                        <Link to={`artist/${ar.id}`}>{ar.name}</Link>
+                                                    </span>
                                                 )
                                             })
                                         }
@@ -100,18 +101,17 @@ class Content extends Component {
                     title="请先登录您的账号!"
                     wrapClassName="vertical-center-modal"
                     visible={this.state.showLoginModal}
-                    onCancel={() => this.setState({showLoginModal:false})}
-                    footer = {null}
+                    onCancel={() => this.setState({ showLoginModal: false })}
+                    footer={null}
                     className="login-modal"
-                    maskClosable={false}
-                >
+                    maskClosable={false}>
                     <Button>
                         <Link to="/login">登录</Link>
                     </Button>
                     <Button>
                         <Link to="/register">注册</Link>
                     </Button>
-                    
+
                 </Modal>
             </div>
         )

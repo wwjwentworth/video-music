@@ -1,19 +1,19 @@
 import * as artistActions from './artist.action'
 export function artist(state = {
     artistList:null,
-    isFetching:false
+    isLoading:false
 }, action) {
     switch(action.type) {
         case artistActions.GET_ARTIST_LIST:
             return {
                 ...state,
-                isFetching:true,
+                isLoading:true,
             }
         case artistActions.GET_ARTIST_LIST_DONE:
             return {
                 ...state,
                 artistList:action.payload,
-                isFetching:false
+                isLoading:false
             }
         default:
             return state

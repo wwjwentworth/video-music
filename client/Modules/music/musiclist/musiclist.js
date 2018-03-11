@@ -18,12 +18,11 @@ class MusicList extends Component {
             clientHeight,
             scrollHeight,
           } = this.contentNode
-        const {dispatch, music:{isFetching}} = this.props
-        if (scrollTop + clientHeight === scrollHeight && !isFetching) {
+        const {dispatch, music:{isLoading}} = this.props
+        if (scrollTop + clientHeight === scrollHeight && !isLoading) {
             const { pageNum, limit } = this.props.music
             dispatch(musicActions.getMusicList(limit, pageNum))
           }
-        // console.log(this.contentNode)
     }
     render() {
         const { musicList } = this.props.music

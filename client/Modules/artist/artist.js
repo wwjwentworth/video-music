@@ -28,16 +28,23 @@ class Artist extends Component {
         }
     }
     render() {
-        const {isFetching, artistList} = this.props.artist
+        const {isLoading, artistList} = this.props.artist
         console.log(this.props)
         return(
             <div className="artist-page">
                 {
-                    !isFetching ? 
+                    !isLoading ? 
                     <div className="wrap">
                         {this.renderArtistInfo(artistList)}
                     </div>
                     :null
+                }
+                {
+                    isLoading ? 
+                    <div className="loading">
+                        <div></div>
+                        <p>loading</p>
+                    </div> : null
                 }
                 <Player></Player>
             </div>

@@ -62,13 +62,13 @@ class Community extends Component {
             alert("222")
         }
         const forkInfo = {
-            user:cookie.load("user"),
-            time:format(new Date(), FORMAT_TIME),
-            fork:0,
-            like:0,
-            comment:[],
-            type:community.type,
-            song:community.song
+            user: cookie.load("user"),
+            time: format(new Date(), FORMAT_TIME),
+            fork: 0,
+            like: 0,
+            comment: [],
+            type: community.type,
+            song: community.song
         }
         dispatch(communityActions.fork(forkInfo, community))
     }
@@ -134,9 +134,13 @@ class Community extends Component {
                                                                             </div>
                                                                             <div className="time">
                                                                                 <p>{text.time}</p>
-                                                                                <Popconfirm title="确定删除此条评论？" onConfirm={() => this.deleteComment(community, index)} okText="确定" cancelText="取消">
-                                                                                    <Icon type="delete" />
-                                                                                </Popconfirm>
+                                                                                {
+                                                                                    community.user === cookie.load("user") ?
+                                                                                    <Popconfirm title="确定删除此条评论？" onConfirm={() => this.deleteComment(community, index)} okText="确定" cancelText="取消">
+                                                                                        <Icon type="delete" />
+                                                                                    </Popconfirm> : null
+                                                                                }
+
 
                                                                             </div>
                                                                         </div>

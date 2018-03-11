@@ -18,14 +18,25 @@ class Music extends Component {
     }
     
     render() {
+        const {isLoading} = this.props.music
         return (
             <div className="wwj-music">
-                <Tabs defaultActiveKey="musicList" className="tabs">
-                    <TabPane tab="个性推荐" key="recommend">个性推荐</TabPane>
-                    <TabPane tab="歌单" key="musicList">
-                        <MusicList></MusicList>
-                    </TabPane>
-                </Tabs>
+                {
+                    !isLoading ? 
+                    <Tabs defaultActiveKey="musicList" className="tabs">
+                        <TabPane tab="个性推荐" key="recommend">个性推荐</TabPane>
+                        <TabPane tab="歌单" key="musicList">
+                            <MusicList></MusicList>
+                        </TabPane>
+                    </Tabs>:null
+                }
+                {
+                    isLoading ? 
+                    <div className="loading">
+                        <div></div>
+                        <p>loading</p>
+                    </div> : null
+                }
                 <Player></Player>
             </div>
         )
