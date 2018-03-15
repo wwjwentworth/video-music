@@ -8,9 +8,14 @@ function* handleLoginRequest() {
         try {
             const {data} = yield call(loginService.loginRequest, payload)
             yield put(loginActions.loginSuccess(data))
-            yield call(promiseFn.resolve, data[0])
+            if(data.errors) {
+                yield call(promiseFn.reject, data.errors)
+            } else {
+                yield call(promiseFn.resolve, data[0])
+            }
+            
         } catch (err) {
-            yield call(promiseFn.reject)
+            
             fork(handleLoginErr, err)
         }
     }

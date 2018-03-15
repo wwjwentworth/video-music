@@ -1,68 +1,84 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { Form, Input, Icon, Checkbox, Button, notification } from 'antd'
 import './login.less'
 import cookie from 'react-cookies';
+import { initHeader, initAnimation, addListener, createCode, code } from '../register/register.canvas'
+
+
 import * as headerActions from '../../components/header/header.action'
 import * as loginActions from './login.action'
 const FormItem = Form.Item
 class LoginForm extends Component {
+    state = {
+        errors: ''
+    }
     componentDidMount() {
-        const {dispatch} = this.props;
-        dispatch(headerActions.refresh())
+        initHeader()
+        addListener()
+        initAnimation()
+        createCode()
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        const {dispatch, history} = this.props
+        const { dispatch, history } = this.props
         this.props.form.validateFields((err, values) => {
-          if (err || !values.username || !values.password) {
-              return
-          }
-          dispatch(loginActions.loginRequest(values, {
-              resolve:(user) => {
-                cookie.save("user", user.username)
-                history.push("/music")
-              },
-              reject:() => {
-                  notification.error({
-                      "message":"登录失败"
-                  })
-              }
-          }))
-          
+            if (err || !values.username || !values.password) {
+                return
+            }
+            dispatch(loginActions.loginRequest(values, {
+                resolve: (user) => {
+                    cookie.save("user", user.username)
+                    history.push("/music")
+                },
+                reject: (err) => {
+                    notification.error({
+                        "message": "登录失败"
+                    })
+                    this.setState({
+                        errors: err
+                    })
+                }
+            }))
+
         });
     }
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
             <div className="wwj-login">
+                {
+                    this.state.errors ?
+                        <p className="error-block">
+                            {this.state.errors}
+                        </p> : null
+                }
+                <canvas id="canvas"></canvas>
                 <Form onSubmit={this.handleSubmit} className="login-form">
-                     <FormItem>
+                    <FormItem>
                         {getFieldDecorator('username', {
-                            rules: [{ required: true, message: 'Please input your username!' }],
+                            rules: [{ required: true, message: '用户名不得为空！' }],
                         })(
-                            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                            <Input placeholder="Username" />
                             )}
                     </FormItem>
                     <FormItem>
                         {getFieldDecorator('password', {
-                            rules: [{ required: true, message: 'Please input your Password!' }],
+                            rules: [{ required: true, message: '密码不得为空！' }],
                         })(
-                            <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                            <Input type="password" placeholder="Password" />
                             )}
                     </FormItem>
                     <FormItem>
-                        {getFieldDecorator('remember', {
-                            valuePropName: 'checked',
-                            initialValue: true,
-                        })(
-                            <Checkbox>Remember me</Checkbox>
-                            )}
-                        <a className="login-form-forgot" href="">Forgot password</a>
+                        <Link to="/forgot">忘记密码</Link>
                         <Button type="primary" htmlType="submit" className="login-form-button">
-                            Log in
+                            立即登录
                         </Button>
-                        Or <a href="">register now!</a>
+                        <div className="login">
+                            <span>没有有Good time账号？</span>
+                            <Link to="/register">立即注册</Link>
+                        </div>
                     </FormItem>
                 </Form>
             </div>
@@ -70,7 +86,7 @@ class LoginForm extends Component {
     }
 }
 const Login = Form.create()(LoginForm);
-function mapStateToProps({ login:{currentUser}}) {
+function mapStateToProps({ login: { currentUser } }) {
     return {
         currentUser,
     }

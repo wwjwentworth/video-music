@@ -1,13 +1,187 @@
 @header-bg-color:#333232;
 @font-color:#3bc29b;
+@header-bg-color:#333232;
+@font-color:#3bc29b;
+@error-color:#f5222d;
 .wwj-login{
-    .login-form{
-        padding: 1rem 5rem;
-        .login-form-button{
-            width: 100%;
+    margin-top: 1rem;
+    padding: .5rem 4.4rem;
+    background-color:@header-bg-color;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    .error-block{
+        position: absolute;
+        font-size: .14rem;
+        color: @error-color;
+        display: flex;
+        align-items: center;
+        top: .24rem;
+        &::before{
+            content: '';
+            background: url('../../assets/error.png');
+            background-size: 100% 100%;
+            width: .14rem;
+            height: .14rem;
+            margin-right: 6px;
         }
-        a{
-            color: @font-color;
+    }
+    .ant-form{
+        box-shadow:0 0 32px 0 rgba(0,0,5,0.3);
+        border-radius:6px;
+        background-color: transparent;
+        padding: .5rem .2rem;
+        color: #fff;
+        .ant-form-item{
+            margin-bottom: .2rem;
+            display: flex;
+            justify-content: center;
+            .ant-form-item-label{
+                width: 15%;
+                &>label{
+                    color: #fff;;
+                    font-size: 14px;
+                }
+            }
+            .ant-form-item-required::before{
+                content: '';
+            }
+            .ant-form-item-control-wrapper{
+                width: 75%;
+                margin-left: .1rem;
+                .ant-form-item-control {
+                    position: relative;
+                    input{
+                        height: .32rem;
+                        font-size: 12px;
+                    }
+                    .ant-form-explain{
+                        position: absolute;
+                        right: 0;
+                        top: 12px;
+                        display: flex;
+                        align-items: center;
+                        &::before{
+                            content: '';
+                            background: url('../../assets/error.png');
+                            background-size: 100% 100%;
+                            width: 14px;
+                            height: 14px;
+                            margin-right: 6px;
+                        }
+                    }
+                    &>a{
+                        display: block;
+                        text-align: right;
+                        text-decoration: none;
+                        color: @font-color;
+                    }
+                    &>button{
+                        width: 100%;
+                        background-color: @font-color;
+                        border: none;
+                    }
+                    .login{
+                        text-align: right;
+                        span{
+                            color: #b2b8bf;
+                        }
+                        a{
+                            text-decoration: none;
+                            color: @font-color;
+                        }
+                    }
+                }
+            }
+            
+        }
+        .check-code{
+            display: flex;
+            align-items: center;
+            &>canvas {
+            width: 1.1rem;
+            height: .38rem;
+            padding-left: .12rem;
+            cursor: pointer;
+            }
+        }
+        .password, .confirm-password{
+            .close{
+            background: url('../../assets/close.png')
+            }
+            .open{
+            background: url('../../assets/open.png')
+            }
+            .eye{
+            position: absolute;
+            right: 0.05rem;
+            top: .13rem;
+            width: .14rem;
+            height: .14rem;
+            z-index: 10;
+            opacity: 0;
+            cursor: pointer;
+            transition: opacity 0.2s linear;
+            background-size: 100% 100%;
+            }
+            &:hover{
+            .eye{
+                opacity: 1;
+            }
+            }
+        }
+        .error-block{
+            position: absolute;
+            left: 3.6rem;
+            top: 0;
+            display: block;
+            height: .4rem;
+            line-height: .4rem;
+            width: 2.6rem;
+            color: @error-color;
+            .anticon{
+            margin-right: 0.08rem;
+            }
+        }
+        .foot {
+            justify-content: flex-end;
+            text-align: right;
+            .ant-form-item-control-wrapper{
+                width: 95%;
+                margin-right: .14rem;
+                a{
+                    color: @font-color;
+                    margin: 0 0.05rem;
+                }
+            }
+            
+            .email{
+                .help-block{
+                    margin-top: -0.02rem;
+                    height: .18rem;
+                    line-height: .18rem;
+                    color: @error-color;
+                    font-size: .12rem;
+                    padding-left: .12rem;
+                }
+            }
+            .reg-form-btn{
+                width: 80%;
+                height: 40px;
+                margin-top: .1rem;
+                background-color: @font-color;
+                border: none;
+            }
+            .login{
+                &>span{
+                    color: #b2b8bf;
+                }
+                &>a{
+                    margin-left: 0.05rem;
+                }
+            }
         }
     }
 }

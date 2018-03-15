@@ -72,7 +72,7 @@ class RegistrationForm extends Component {
                         {this.state.errors}
                     </p> : null
                 }
-                <canvas id="reg-canvas"></canvas>
+                <canvas id="canvas"></canvas>
                 <div className="wrap"></div>
                 <Form onSubmit={this.handleSubmit} >
                     <FormItem label="用户名" >

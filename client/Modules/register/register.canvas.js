@@ -1,4 +1,3 @@
-import TweenLite from 'gasp'
 export var code;
 var width, height, largeHeader, canvas, ctx, points, target, animateHeader = true;
 export function initHeader() {
@@ -7,7 +6,7 @@ export function initHeader() {
     target = { x: width / 2, y: height / 2 };
 
 
-    canvas = document.getElementById('reg-canvas');
+    canvas = document.getElementById('canvas');
     canvas.width = width;
     canvas.height = height;
     ctx = canvas.getContext('2d');
