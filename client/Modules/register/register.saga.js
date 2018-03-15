@@ -9,6 +9,7 @@ function* handleRegister() {
             if(data.errors) {
                 yield call(promiseFn.reject, data.errors)
             } else {
+                yield put(registerActions.registerDone())
                 yield call(promiseFn.resolve)
             }
             

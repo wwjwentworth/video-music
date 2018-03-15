@@ -6,3 +6,10 @@ export function register(payload, promiseFn){
         promiseFn
     }
 }
+export const  REGISTER_DONE = 'REGISTER_DONE'
+export function registerDone(payload){
+    return {
+        type:REGISTER_DONE,
+        payload,
+    }
+}

@@ -7,6 +7,7 @@ import {music} from './Modules/music/music.reducer'
 import {player} from './Modules/player/player.reducer'
 import {artist} from './Modules/artist/artist.reducer'
 import {login} from './Modules/login/login.reducer'
+import {register} from './Modules/register/register.reducer'
 import {community} from './Modules/community/community.reducer'
 const rootReducer = combineReducers({
     carousel,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     player,
     artist,
     login,
+    register,
     community
 })
 
