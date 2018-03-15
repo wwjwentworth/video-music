@@ -38,3 +38,11 @@ export function shareSong(payload) {
         payload
     }
 }
+
+export const KEEP_SCROLL = 'KEEP_SCROLL'
+export function keepScroll(payload) {
+    return {
+        type:KEEP_SCROLL, 
+        payload
+    }
+}

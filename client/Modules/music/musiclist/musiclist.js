@@ -12,6 +12,12 @@ class MusicList extends Component {
         }
         this.contentNode.scrollTop = scrollPoint
     }
+    componentWillUnmount() {
+        const {dispatch} = this.props
+        const { scrollTop } = this.contentNode
+        // 记录滚动点
+        dispatch(musicActions.keepScroll(scrollTop))
+      }
     handleScroll = () => {
         const {
             scrollTop,
@@ -22,7 +28,7 @@ class MusicList extends Component {
         if (scrollTop + clientHeight === scrollHeight && !isLoading) {
             const { pageNum, limit } = this.props.music
             dispatch(musicActions.getMusicList(limit, pageNum))
-          }
+        }
     }
     render() {
         const { musicList } = this.props.music

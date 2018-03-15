@@ -32,6 +32,11 @@ export function music(state = {
                 musicDetails:action.payload,
                 isLoading:false
             }
+        case musicActions.KEEP_SCROLL:
+            return{
+                ...state,
+                scrollPoint:action.payload
+            }
         default:
             return state
     }
