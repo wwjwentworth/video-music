@@ -6,7 +6,6 @@ import {video} from './Modules/video/video.reducer'
 import {music} from './Modules/music/music.reducer'
 import {player} from './Modules/player/player.reducer'
 import {artist} from './Modules/artist/artist.reducer'
-import {register} from './Modules/register/register.reducer'
 import {login} from './Modules/login/login.reducer'
 import {community} from './Modules/community/community.reducer'
 const rootReducer = combineReducers({
@@ -16,7 +15,6 @@ const rootReducer = combineReducers({
     music,
     player,
     artist,
-    register,
     login,
     community
 })
