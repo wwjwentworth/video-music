@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { formatDuration, formatCurrentTime } from '../../common/util'
 import { Button, Icon, Tooltip } from 'antd'
 
+import * as playerActions from './player.action'
+
 import ReadyList from './ready-list/ready-list'
 
 import './player.less'
@@ -17,7 +19,7 @@ class Player extends Component {
         volumeIcon: 'icon-volume-medium',
         mode: 'listloop',
         modeIcon: 'swap',
-        modeText:'列表循环',
+        modeText: '列表循环',
         showReadyList: false,
         showPlayBtn: false,
         isFavorite: false
@@ -27,18 +29,33 @@ class Player extends Component {
     }
     componentDidUpdate(prevProps) {
         //把这里当成redux的回调吧
-        if(this.props.player.song.id !== prevProps.player.song.id) {
+        if (this.props.player.song.id !== prevProps.player.song.id) {
             this.changeSongCallback()
         }
     }
     changeSongCallback = () => {
-        const {showPlayBtn} = this.state
-        if(!showPlayBtn || this.props.player.flag === 'PLAY_SONG') {
+        const { showPlayBtn } = this.state
+        if (!showPlayBtn || this.props.player.flag === 'PLAY_SONG') {
             this.toPlay()
         }
     }
     preSong = () => {
-        console.log('preSong')
+        const { mode } = this.state
+        const { dispatch } = this.props
+        let { index, playlist } = this.props.player
+        index -= 1;
+        if (index === -1) {
+            index = playlist.length - 1
+        }
+        if (mode === 'shuffleplay') {
+            index = Math.floor(Math.random() * playlist.length)
+        }
+        const song = playlist[index]
+        this.setState({
+            showPlayBtn:false
+        }, () => {
+            dispatch(playerActions.changeSong(song, index))
+        })
     }
     togglePlay = () => {
         if (this.audio.paused || this.audio.ended) {
@@ -54,7 +71,22 @@ class Player extends Component {
         }
     }
     nextSong = () => {
-        console.log('nextSong')
+        const { mode } = this.state
+        const {dispatch} = this.props
+        let { index, playlist } = this.props.player
+        index += 1
+        if (index === playlist.length) {
+            index = 0
+        }
+        if (mode === 'shuffleplay') {
+            index = Math.floor(Math.random() * playlist.length)
+        }
+        const song = playlist[index]
+        this.setState({
+            showPlayBtn:false
+        }, () => {
+            dispatch(playerActions.changeSong(song, index))
+        })
     }
     setMode = () => {
         const { mode } = this.state
@@ -64,7 +96,7 @@ class Player extends Component {
                 this.setState({
                     mode: 'sequential',
                     modeIcon: 'menu-unfold',
-                    modeText:'顺序播放'
+                    modeText: '顺序播放'
                 })
                 break
             // 顺序播放 => 单曲循环
@@ -72,7 +104,7 @@ class Player extends Component {
                 this.setState({
                     mode: 'singleCycle',
                     modeIcon: 'link',
-                    modeText:'单曲循环'
+                    modeText: '单曲循环'
                 }, () => {
                     this.audio.loop = true
                 })
@@ -82,7 +114,7 @@ class Player extends Component {
                 this.setState({
                     mode: 'shuffleplay',
                     modeIcon: 'paper-clip',
-                    modeText:'随机播放'
+                    modeText: '随机播放'
                 }, () => {
                     this.audio.loop = false
                 })
@@ -92,7 +124,7 @@ class Player extends Component {
                 this.setState({
                     mode: 'listloop',
                     modeIcon: 'swap',
-                    modeText:'列表循环'
+                    modeText: '列表循环'
                 })
                 break
             default:
@@ -112,11 +144,11 @@ class Player extends Component {
     toPlay = () => {
         // 资源无效异常处理存在问题
         this.audio.play()
-        this.setState({ showPlayBtn:true })
+        this.setState({ showPlayBtn: true })
     };
     toPause = () => {
         this.audio.pause()
-        this.setState({ showPlayBtn:false })
+        this.setState({ showPlayBtn: false })
     };
     setVol = (e) => {
         const distance = e.clientX - this.volBar.offsetLeft
@@ -233,7 +265,7 @@ class Player extends Component {
                             color: this.state.isFavorite ? 'red' : ''
                         }} />
                     <Tooltip title={this.state.modeText}>
-                        <Icon type={this.state.modeIcon } onClick={this.setMode} />
+                        <Icon type={this.state.modeIcon} onClick={this.setMode} />
                     </Tooltip>
                     <Icon type="appstore" onClick={this.toggleReadyList} />
                 </div>

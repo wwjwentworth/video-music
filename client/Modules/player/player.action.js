@@ -29,3 +29,13 @@ export function addSongDone(payload) {
         payload
     }
 }
+
+export const CHANGE_SONG = 'CHANGE_SONG'
+export function changeSong(payload, index, flag = '') {
+    return {
+        type:CHANGE_SONG,
+        payload,
+        index,
+        flag
+    }
+}

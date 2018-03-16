@@ -58,6 +58,13 @@ export function player(state = {
                 index: 0,
                 flag: action.type,
             }
+        case playerActions.CHANGE_SONG:
+            return {
+                ...state,
+                song:action.payload,
+                index:action.index,
+                flag:action.flag
+            }
         default:
             return state
     }
