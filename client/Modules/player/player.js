@@ -25,6 +25,18 @@ class Player extends Component {
     componentDidMount() {
         console.log(this.props.player)
     }
+    componentDidUpdate(prevProps) {
+        //把这里当成redux的回调吧
+        if(this.props.player.song.id !== prevProps.player.song.id) {
+            this.changeSongCallback()
+        }
+    }
+    changeSongCallback = () => {
+        const {showPlayBtn} = this.state
+        if(!showPlayBtn || this.props.player.flag === 'PLAY_SONG') {
+            this.toPlay()
+        }
+    }
     preSong = () => {
         console.log('preSong')
     }
@@ -100,11 +112,11 @@ class Player extends Component {
     toPlay = () => {
         // 资源无效异常处理存在问题
         this.audio.play()
-        this.setState({ ppIcon: 'icon-pause2' })
+        this.setState({ showPlayBtn:true })
     };
     toPause = () => {
         this.audio.pause()
-        this.setState({ ppIcon: 'icon-play3' })
+        this.setState({ showPlayBtn:false })
     };
     setVol = (e) => {
         const distance = e.clientX - this.volBar.offsetLeft
