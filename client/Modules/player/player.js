@@ -176,6 +176,16 @@ class Player extends Component {
             cdt: formatCurrentTime(this.audio.currentTime),
         })
     }
+    setCurTime = (e) => {
+        //不要用e.target.offsetWidth 
+        const distance = e.clientX - this.progressBar.offsetLeft
+        const scale = distance / this.progressBar.offsetWidth
+
+        this.audio.currentTime = this.audio.duration * scale
+        this.setState({
+            curProgressBarWidth : `${distance}px`
+        })
+    }
     render() {
         const {
             ppIcon,
@@ -222,7 +232,7 @@ class Player extends Component {
                         </span>
                         <div className="song-artist">
                             {
-                                song.ar.map(v => <Link key={v.id} to={`/artistinfo/${v.id}`}> {v.name} </Link>)
+                                song.ar.map(v => <Link key={v.id} to={`/music/artist/${v.id}`}> {v.name}</Link>)
                             }
                         </div>
                         <div className="song-duration">
