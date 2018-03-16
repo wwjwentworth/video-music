@@ -63,6 +63,11 @@ class Content extends Component {
         dispatch(musicActions.shareSong(sharedSongInfo))
         history.push('/community')
     }
+
+    addSong = (song) => {
+        const {dispatch} = this.props;
+        dispatch(playerActions.addSong(song))
+    }
     render() {
         const { tracks, isShowAr = true } = this.props
         return (
@@ -80,6 +85,7 @@ class Content extends Component {
                                         {data.name}
                                     </p>
                                     <p className="artist">
+                                        <Icon type="plus-circle" onClick={() => this.addSong(data.track)} />
                                         {
                                             data.artist.map((ar, index) => {
                                                 return (

@@ -36,6 +36,7 @@ function* handleShareSong() {
         }
     }
 }
+
 function* handleMusicErr(err) {
     yield call(musicService.showMessage, 'error', err)
 }

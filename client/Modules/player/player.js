@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { formatDuration, formatCurrentTime } from '../../common/util'
-import { Button, Icon } from 'antd'
+import { Button, Icon, Tooltip } from 'antd'
+
+import ReadyList from './ready-list/ready-list'
 
 import './player.less'
 class Player extends Component {
@@ -14,9 +16,11 @@ class Player extends Component {
         lastVolumeIcon: '',
         volumeIcon: 'icon-volume-medium',
         mode: 'listloop',
-        modeIcon: 'icon-loop2',
+        modeIcon: 'swap',
+        modeText:'列表循环',
         showReadyList: false,
-        showPlayBtn: false
+        showPlayBtn: false,
+        isFavorite: false
     }
     componentDidMount() {
         console.log(this.props.player)
@@ -41,10 +45,57 @@ class Player extends Component {
         console.log('nextSong')
     }
     setMode = () => {
-        console.log('setMode')
+        const { mode } = this.state
+        switch (mode) {
+            // 列表循环 => 顺序播放
+            case 'listloop':
+                this.setState({
+                    mode: 'sequential',
+                    modeIcon: 'menu-unfold',
+                    modeText:'顺序播放'
+                })
+                break
+            // 顺序播放 => 单曲循环
+            case 'sequential':
+                this.setState({
+                    mode: 'singleCycle',
+                    modeIcon: 'link',
+                    modeText:'单曲循环'
+                }, () => {
+                    this.audio.loop = true
+                })
+                break
+            // 单曲循环 => 随机播放
+            case 'singleCycle':
+                this.setState({
+                    mode: 'shuffleplay',
+                    modeIcon: 'paper-clip',
+                    modeText:'随机播放'
+                }, () => {
+                    this.audio.loop = false
+                })
+                break
+            // 随机播放 => 列表循环
+            case 'shuffleplay':
+                this.setState({
+                    mode: 'listloop',
+                    modeIcon: 'swap',
+                    modeText:'列表循环'
+                })
+                break
+            default:
+                break
+        }
+    }
+    toggleHeart = () => {
+        this.setState({
+            isFavorite: !this.state.isFavorite
+        })
     }
     toggleReadyList = () => {
-        console.log('toggleReadyList')
+        this.setState({
+            showReadyList: !this.state.showReadyList
+        })
     }
     toPlay = () => {
         // 资源无效异常处理存在问题
@@ -90,7 +141,7 @@ class Player extends Component {
             curVolBarWidth,
             showReadyList,
           } = this.state
-        const { song } = this.props.player
+        const { song, playlist } = this.props.player
         return (
             <div className="player">
                 {this.renderAlbumImg(song)}
@@ -165,10 +216,16 @@ class Player extends Component {
                 </div>
 
                 <div className="player-mode">
-                    <i className="icon-heart" />
-                    <i className={modeIcon} onClick={this.setMode} />
-                    <i className="icon-list" onClick={this.toggleReadyList} />
+                    <Icon type="heart" onClick={this.toggleHeart}
+                        style={{
+                            color: this.state.isFavorite ? 'red' : ''
+                        }} />
+                    <Tooltip title={this.state.modeText}>
+                        <Icon type={this.state.modeIcon } onClick={this.setMode} />
+                    </Tooltip>
+                    <Icon type="appstore" onClick={this.toggleReadyList} />
                 </div>
+                {showReadyList ? <ReadyList playlist={playlist} song={song} /> : null}
             </div>
         )
     }

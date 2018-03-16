@@ -11,7 +11,7 @@ class Music extends Component {
     
     componentDidMount() {
         const {dispatch} = this.props
-        dispatch(headerActions.refresh())
+        // dispatch(headerActions.refresh())
         if(cookie.load("user")) {
             dispatch(headerActions.setUser())
         }

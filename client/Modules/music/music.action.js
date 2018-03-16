@@ -39,6 +39,15 @@ export function shareSong(payload) {
     }
 }
 
+export const ADD_SONG = 'ADD_SONG'
+export function addSong(payload) {
+    return {
+        type:ADD_SONG,
+        payload
+    }
+}
+
+
 export const KEEP_SCROLL = 'KEEP_SCROLL'
 export function keepScroll(payload) {
     return {

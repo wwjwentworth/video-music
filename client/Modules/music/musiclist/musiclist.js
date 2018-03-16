@@ -6,25 +6,25 @@ import './musiclist.less'
 class MusicList extends Component {
     componentDidMount() {
         const { dispatch, music } = this.props
-        const {limit, pageNum, musicList, scrollPoint} = music
+        const { limit, pageNum, musicList, scrollPoint } = music
         if (!musicList.length) {
             dispatch(musicActions.getMusicList(limit, pageNum))
         }
         this.contentNode.scrollTop = scrollPoint
     }
     componentWillUnmount() {
-        const {dispatch} = this.props
+        const { dispatch } = this.props
         const { scrollTop } = this.contentNode
         // 记录滚动点
         dispatch(musicActions.keepScroll(scrollTop))
-      }
+    }
     handleScroll = () => {
         const {
             scrollTop,
             clientHeight,
             scrollHeight,
           } = this.contentNode
-        const {dispatch, music:{isLoading}} = this.props
+        const { dispatch, music: { isLoading } } = this.props
         if (scrollTop + clientHeight === scrollHeight && !isLoading) {
             const { pageNum, limit } = this.props.music
             dispatch(musicActions.getMusicList(limit, pageNum))
