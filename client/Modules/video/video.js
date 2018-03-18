@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import Carousel from '../../components/carousel/carousel'
 import * as videoActions from './video.action'
 import * as headerActions from '../../components/header/header.action';
+import Header from '../../components/header/header'
+
 import './video.less'
 class Videos extends Component {
     componentDidMount() {
@@ -24,6 +26,7 @@ class Videos extends Component {
     render() {
         return (
             <div className="wwj-video">
+                <Header></Header>
                 {this.renderBanner(this.props.video)}
                 <div className="content">
                     {this.renderPushOnList(this.props.video)}

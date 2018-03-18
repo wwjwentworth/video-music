@@ -4,6 +4,7 @@ import * as headerActions from '../../components/header/header.action'
 import cookie from 'react-cookies'
 import MusicList from './musiclist/musiclist'
 import Player from '../player/player'
+import Header  from '../../components/header/header'
 import  './music.less'
 import {Tabs} from 'antd'
 const TabPane = Tabs.TabPane;
@@ -21,6 +22,7 @@ class Music extends Component {
         const {isLoading} = this.props.music
         return (
             <div className="wwj-music">
+                <Header></Header>
                 {
                     !isLoading ? 
                     <Tabs defaultActiveKey="musicList" className="tabs">

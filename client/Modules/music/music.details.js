@@ -6,6 +6,7 @@ import * as headerActions from '../../components/header/header.action'
 import MusicDetailsHeader from './music-details-header/header'
 import MusicDetailsContent from './music-details-song-list/content'
 import Player from '../player/player'
+import Header from '../../components/header/header'
 class MusicDetails extends Component {
     componentDidMount() {
         const { dispatch, match: { params: { musicID } } } = this.props
@@ -16,6 +17,7 @@ class MusicDetails extends Component {
         const { musicDetails, isLoading } = this.props.music
         return (
             <div className="wwj-music-details">
+                <Header></Header>
                 {
                     !isLoading ?
                         <div className="wrap">

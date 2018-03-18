@@ -5,6 +5,7 @@ import cookie from 'react-cookies'
 import * as communityActions from './community.action'
 import * as playerActions from '../player/player.action'
 import Player from '../player/player'
+import Header from '../../components/header/header'
 import { format } from 'date-fns'
 import './community.less'
 
@@ -77,6 +78,7 @@ class Community extends Component {
         const { communityList, isloading } = community
         return (
             <div className="wwj-community">
+                <Header></Header>
                 {
                     !isloading ?
                         <div className="list-wrap">

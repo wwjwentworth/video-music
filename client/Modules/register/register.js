@@ -6,6 +6,7 @@ import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Butto
 import { initHeader, initAnimation, addListener, createCode, code } from './register.canvas'
 
 import * as registerActions from './register.action'
+import Header from '../../components/header/header'
 
 import './register.less'
 const FormItem = Form.Item;
@@ -66,6 +67,7 @@ class RegistrationForm extends Component {
         const { form: { getFieldDecorator }, register: { isLoading } } = this.props;
         return (
             <div className="wwj-register" id="wwj-register">
+                <Header></Header>
                 {
                     !isLoading ?
                         <div>

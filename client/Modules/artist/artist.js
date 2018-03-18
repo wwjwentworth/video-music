@@ -7,7 +7,7 @@ import * as headerActions from '../../components/header/header.action'
 import ArtistHeader from './artist-header/header'
 import ArtistContent from './artist-content/content'
 import Player from '../player/player'
-
+import Header from '../../components/header/header'
 import './artist.less'
 class Artist extends Component {
     componentDidMount() {
@@ -29,9 +29,9 @@ class Artist extends Component {
     }
     render() {
         const {isLoading, artistList} = this.props.artist
-        console.log(this.props)
         return(
             <div className="artist-page">
+                <Header></Header>
                 {
                     !isLoading ? 
                     <div className="wrap">

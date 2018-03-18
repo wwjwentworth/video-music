@@ -5,7 +5,7 @@ import { Form, Input, Icon, Checkbox, Button, notification } from 'antd'
 import './login.less'
 import cookie from 'react-cookies';
 import { initHeader, initAnimation, addListener, createCode, code } from '../register/register.canvas'
-
+import Header from '../../components/header/header'
 
 import * as headerActions from '../../components/header/header.action'
 import * as loginActions from './login.action'
@@ -48,6 +48,7 @@ class LoginForm extends Component {
         const { getFieldDecorator } = this.props.form;
         return (
             <div className="wwj-login">
+                <Header></Header>
                 {
                     this.state.errors ?
                         <p className="error-block">

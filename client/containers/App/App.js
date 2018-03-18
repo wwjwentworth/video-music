@@ -6,16 +6,15 @@ import Artist from '../../Modules/artist/artist'
 import Community from '../../Modules/community/community'
 import Login from '../../Modules/login/login'
 import Register from '../../Modules/register/register'
-import Header from '../../components/header/header'
 import './App.less'
 import videoDetails from '../../Modules/video/video.details';
 import musicDetails from '../../Modules/music/music.details'
+import Page404 from '../../Modules/page404/page404'
 class App extends Component {
     render() {
         return (
             <BrowserRouter >
                 <div className="app">
-                    <Header></Header>
                     <Switch>
                         <Route exact path='/video' component={Video} />
                         <Route exact path='/video/:videoID' component={videoDetails} />
@@ -26,7 +25,9 @@ class App extends Component {
                         <Route exact path='/register' component={Register} />
                         <Route exact path='/login' component={Login} />
                         <Route exact path='/community' component={Community} />
+                        <Route component={Page404}/>
                     </Switch>
+                    
                 </div>
             </BrowserRouter>
         )

@@ -52,7 +52,7 @@ class Player extends Component {
         }
         const song = playlist[index]
         this.setState({
-            showPlayBtn:false
+            showPlayBtn: false
         }, () => {
             dispatch(playerActions.changeSong(song, index))
         })
@@ -72,7 +72,7 @@ class Player extends Component {
     }
     nextSong = () => {
         const { mode } = this.state
-        const {dispatch} = this.props
+        const { dispatch } = this.props
         let { index, playlist } = this.props.player
         index += 1
         if (index === playlist.length) {
@@ -83,7 +83,7 @@ class Player extends Component {
         }
         const song = playlist[index]
         this.setState({
-            showPlayBtn:false
+            showPlayBtn: false
         }, () => {
             dispatch(playerActions.changeSong(song, index))
         })
@@ -183,8 +183,30 @@ class Player extends Component {
 
         this.audio.currentTime = this.audio.duration * scale
         this.setState({
-            curProgressBarWidth : `${distance}px`
+            curProgressBarWidth: `${distance}px`
         })
+    }
+    ended = () => {
+        //当歌曲播放完毕时会触发该方法
+        const { mode } = this.state
+        const { index, playlist } = this.props.player
+        switch (mode) {
+            case 'listloop':
+                this.nextSong()
+                break
+            case 'sequential':
+                if (index !== playlist.length - 1) {
+                    this.nextSong()
+                } else {
+                    this.toPause()
+                }
+                break
+            case 'shuffleplay':
+                this.nextSong()
+                break
+            default:
+                break
+        }
     }
     render() {
         const {
