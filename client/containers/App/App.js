@@ -10,6 +10,7 @@ import './App.less'
 import videoDetails from '../../Modules/video/video.details';
 import musicDetails from '../../Modules/music/music.details'
 import Page404 from '../../Modules/page404/page404'
+import BaiduMap from '../../Modules/baiduMap/baidu'
 class App extends Component {
     render() {
         return (
@@ -19,12 +20,13 @@ class App extends Component {
                         <Route exact path='/video' component={Video} />
                         <Route exact path='/video/:videoID' component={videoDetails} />
                         <Route exact path='/music' component={Music} />
-                        <Route exact path='/' component={Music} />
+                        {/* <Route exact path='/' component={Music} /> */}
                         <Route exact path='/music/:musicID' component={musicDetails}/>
                         <Route exact path='/music/artist/:artistID' component={Artist}/>
                         <Route exact path='/register' component={Register} />
                         <Route exact path='/login' component={Login} />
                         <Route exact path='/community' component={Community} />
+                        <Route exact path='/' component={BaiduMap} />
                         <Route component={Page404}/>
                     </Switch>
                     

@@ -7,11 +7,10 @@ let HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 })
 module.exports = {
   devtool: 'source-map',//配置生成Source Maps，选择合适的选项
-  entry: ['babel-polyfill','./client/index.js'],
+  entry: ['babel-polyfill', './client/index.js'],
   output: {
     path: path.resolve('./dist'),
     filename: 'bundle.js',
-    // publicPath:'dist'
   },
   module: {
     loaders: [
@@ -20,17 +19,18 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/
       },
-      { test: /\.jsx?$/,
+      {
+        test: /\.jsx?$/,
         loader: 'babel-loader',
         exclude: /node_modules/
       },
       {
-        test:/\.css$/,
-        loader:'style-loader!css-loader'
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
       },
       {
-        test:/\.less$/,
-        loader:['style-loader', 'css-loader', 'less-loader']
+        test: /\.less$/,
+        loader: ['style-loader', 'css-loader', 'less-loader']
       },
       {
         test: /\.(png|jpg)$/,
@@ -39,12 +39,13 @@ module.exports = {
     ]
   },
   plugins: [HtmlWebpackPluginConfig],
-  devServer:{
-    inline:true,
-    port:1004,
-    open:true,
-    historyApiFallback:{
-      index:'dist/index.html'
+  devServer: {
+    inline: true,
+    port: 1004,
+    open: true,
+    historyApiFallback: {
+      index: 'dist/index.html'
+    },
   },
-  }
+  
 }
