@@ -21,7 +21,7 @@ class Carousel extends Component{
         dispatch(carouselAction.changeNowLocal(now))
     }
     render() {
-        const {items, play_img} = this.props
+        const {items} = this.props
         const { nowLocal,speed,arrows,dots,pause
         } = this.props.carousel
         const count = items.length;
@@ -29,8 +29,7 @@ class Carousel extends Component{
             return(
                 <CarouselItem item={item}
                     count={count}
-                    key={index}
-                    play_img={play_img}>
+                    key={index}>
                 </CarouselItem>
             )
         })

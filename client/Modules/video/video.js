@@ -42,8 +42,7 @@ class Videos extends Component {
                 <div className="banner">
                     {
                         !loading &&
-                        <Carousel items={bannerList}
-                            play_img={imgs.play_img}>
+                        <Carousel items={bannerList}>
                         </Carousel>
                     }
                 </div>

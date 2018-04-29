@@ -6,6 +6,10 @@ export function header(state = {
         logo: logo_img
     },
     nav: [{
+        path:'/',
+        text:'HOME',
+        active:true
+    },{
         path: '/video',
         text: 'VIDEO',
         active: false

@@ -24,18 +24,16 @@ class LoginForm extends Component {
         e.preventDefault();
         const { dispatch, history } = this.props
         this.props.form.validateFields((err, values) => {
-            if (err || !values.username || !values.password) {
+            if (err || !values.email || !values.password) {
                 return
             }
             dispatch(loginActions.loginRequest(values, {
                 resolve: (user) => {
-                    cookie.save("user", user.username)
-                    history.push("/music")
+                    console.log(user)
+                    cookie.save("user", user.name)
+                    history.push("/")
                 },
                 reject: (err) => {
-                    notification.error({
-                        "message": "登录失败"
-                    })
                     this.setState({
                         errors: err
                     })
@@ -49,26 +47,34 @@ class LoginForm extends Component {
         return (
             <div className="wwj-login">
                 <Header></Header>
+                
+                <canvas id="canvas"></canvas>
+                <Form onSubmit={this.handleSubmit} className="login-form">
                 {
                     this.state.errors ?
                         <p className="error-block">
                             {this.state.errors}
                         </p> : null
                 }
-                <canvas id="canvas"></canvas>
-                <Form onSubmit={this.handleSubmit} className="login-form">
                     <FormItem>
-                        {getFieldDecorator('username', {
-                            rules: [{ required: true, message: '用户名不得为空！' }],
+                        {getFieldDecorator('email', {
+                            rules: [{
+                                type: 'email', message: '这不是一个有效的邮箱！',
+                            }, {
+                                required: true, message: '邮箱不得为空！',
+                            }],
                         })(
-                            <Input placeholder="Username" />
-                            )}
+                            <div className="email">
+                                <Input placeholder="请输入邮箱"/>
+                            </div>
+                            )
+                        }
                     </FormItem>
                     <FormItem>
                         {getFieldDecorator('password', {
                             rules: [{ required: true, message: '密码不得为空！' }],
                         })(
-                            <Input type="password" placeholder="Password" />
+                            <Input type="password" placeholder="请输入密码" />
                             )}
                     </FormItem>
                     <FormItem>
@@ -77,7 +83,7 @@ class LoginForm extends Component {
                             立即登录
                         </Button>
                         <div className="login">
-                            <span>没有有Good time账号？</span>
+                            <span>没有Good time账号？</span>
                             <Link to="/register">立即注册</Link>
                         </div>
                     </FormItem>

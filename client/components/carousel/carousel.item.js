@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 class CarouselItem extends Component {
 
     render() {
-        const { count, item, play_img } = this.props
+        const { count, item } = this.props
         const width = 100 / count + '%'
-        // console.log(this.props)
         return (
             <li className="carousel-item" style={{ width: width }}>
                 <div className="wrap"></div>
@@ -33,7 +32,6 @@ class CarouselItem extends Component {
                                     <p className="item director">{item.director}</p>
                                     <p className="item actors">{item.actors}</p>
                                     <p className="item info">{item.info}</p>
-                                    <img src={play_img} alt="" />
                                 </div>
                             </div>
                         }

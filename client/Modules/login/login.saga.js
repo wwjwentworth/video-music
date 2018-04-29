@@ -15,7 +15,6 @@ function* handleLoginRequest() {
             }
             
         } catch (err) {
-            
             fork(handleLoginErr, err)
         }
     }

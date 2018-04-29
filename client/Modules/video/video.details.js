@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as headerActions from '../../components/header/header.action';
 import *as videoActions from './video.action'
+import Header from '../../components/header/header'
 import './video.details.less'
-
 class VideoDetails extends Component {
     componentDidMount() {
         const {match, dispatch} = this.props
@@ -15,6 +15,7 @@ class VideoDetails extends Component {
         const { details, loading } = this.props.video
         return (
             <div className="wwj-video-details">
+                <Header />
                 <div className="post-video">
                 {
                     loading &&
@@ -22,7 +23,7 @@ class VideoDetails extends Component {
                 }
                 {
                     !loading && details.video &&
-                    <video src={details.video} controls></video>
+                    <video src={details.video} controls autoPlay ></video>
                 }
                 {
                     !loading && details.iframe &&

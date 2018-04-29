@@ -10,22 +10,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    .error-block{
-        position: absolute;
-        font-size: .14rem;
-        color: @error-color;
-        display: flex;
-        align-items: center;
-        top: .24rem;
-        &::before{
-            content: '';
-            background: url('../../assets/error.png');
-            background-size: 100% 100%;
-            width: .14rem;
-            height: .14rem;
-            margin-right: 6px;
-        }
-    }
+    
     .ant-form{
         box-shadow:0 0 32px 0 rgba(0,0,5,0.3);
         border-radius:6px;
@@ -33,7 +18,24 @@
         padding: .5rem .2rem;
         color: #fff;
         margin-top: 1rem;
-        
+        position: relative;
+        .error-block{
+            position: absolute;
+            left: 80px;
+            font-size: .14rem;
+            color: @error-color;
+            display: flex;
+            align-items: center;
+            top: .24rem;
+            &::before{
+                content: '';
+                background: url('../../assets/error.png');
+                background-size: 100% 100%;
+                width: .14rem;
+                height: .14rem;
+                margin-right: 6px;
+            }
+        }
         .ant-form-item{
             margin-bottom: .2rem;
             display: flex;
@@ -56,21 +58,6 @@
                     input{
                         height: .32rem;
                         font-size: 12px;
-                    }
-                    .ant-form-explain{
-                        position: absolute;
-                        right: 0;
-                        top: 12px;
-                        display: flex;
-                        align-items: center;
-                        &::before{
-                            content: '';
-                            background: url('../../assets/error.png');
-                            background-size: 100% 100%;
-                            width: 14px;
-                            height: 14px;
-                            margin-right: 6px;
-                        }
                     }
                     &>a{
                         display: block;
@@ -132,19 +119,19 @@
             }
             }
         }
-        .error-block{
-            position: absolute;
-            left: 3.6rem;
-            top: 0;
-            display: block;
-            height: .4rem;
-            line-height: .4rem;
-            width: 2.6rem;
-            color: @error-color;
-            .anticon{
-            margin-right: 0.08rem;
-            }
-        }
+        // .error-block{
+        //     position: absolute;
+        //     left: 3.6rem;
+        //     top: 0;
+        //     display: block;
+        //     height: .4rem;
+        //     line-height: .4rem;
+        //     width: 2.6rem;
+        //     color: @error-color;
+        //     .anticon{
+        //     margin-right: 0.08rem;
+        //     }
+        // }
         .foot {
             justify-content: flex-end;
             text-align: right;

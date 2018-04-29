@@ -11,7 +11,7 @@ class Header extends Component {
         const { dispatch } = this.props
         dispatch(headerActions.changePage(index))
     }
-   
+    
     removeCookie = () => {
         const {history} = this.props
         cookie.remove("user")
@@ -22,31 +22,34 @@ class Header extends Component {
     render() {
         const { header } = this.props
         const { logo_img, nav } = header
-
+        console.log(window.location.pathname)
         return (
             <div className="wwj-header">
                 <div className="logo">
                     <img src={require('../../assets/logo.png')} alt="" />
                 </div>
                 <ul className="nav">
-                    <li className="list-item">
+                    <li className={`list-item ${window.location.pathname === '/' ? 'active' : ''}`} >
+                        <Link to='/'>HOME</Link>
+                    </li>
+                    <li className={`list-item ${window.location.pathname.indexOf("video") >= 0 ? 'active' : ''}`}>
                         <Link to="/video">VIDEO</Link>
                     </li>
-                    <li className="list-item">
+                    <li className={`list-item ${window.location.pathname.indexOf("music") >= 0 ? 'active' : ''}`}>
                         <Link to="/music">MUSIC</Link>
                     </li>
-                    <li className="list-item">
+                    <li className={`list-item ${window.location.pathname.indexOf("community") >= 0 ? 'active' : ''}`}>
                         <Link to="/community">COMMUNITY</Link>
                     </li>
                     {
                         !cookie.load("user") ?
-                            <li className="list-item">
+                            <li className={`list-item ${window.location.pathname.indexOf("login") >= 0  ? 'active' : ''}`}>
                                 <Link to="/login">LOGIN</Link>
                             </li> : null
                     }
                     {
                         !cookie.load("user") ?
-                        <li className="list-item">
+                        <li className={`list-item ${window.location.pathname === '/register' ? 'active' : ''}`}>
                             <Link to="/register">REGISTER</Link>
                         </li> : null
                     }

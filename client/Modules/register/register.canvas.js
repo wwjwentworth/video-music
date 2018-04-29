@@ -164,8 +164,8 @@ function showCode(code) {
       const cxt = canvas.getContext('2d')
       cxt.clearRect(0, 0, canvas.width, canvas.height)
       cxt.font = "100px 'Microsoft Yahei'"
-      cxt.fillText(code, 0, 110)
       cxt.fillStyle = '#3bc29b'
+      cxt.fillText(code, 0, 110)
     }
   }
   export function createCode() {
