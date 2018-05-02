@@ -28,7 +28,7 @@
         flex: 1;
         height: 100%;
         margin-bottom: 0;
-        .list-item{
+        .list-item, .user{
             margin-right:.3rem;
             position: relative;
             a{
@@ -41,6 +41,13 @@
             &:nth-of-type(5) {
                 position: absolute;
                 right: 100px;
+                display: flex;
+                align-items: center;
+                .ant-avatar{
+                    margin-right: 8px;
+                    width: 24px;
+                    height: 24px;
+                }
             }
             &:nth-of-type(6) {
                 position: absolute;

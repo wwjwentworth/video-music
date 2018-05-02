@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import cookie from 'react-cookies'
-import { Button } from 'antd'
+import { Button, Avatar, Icon } from 'antd'
 import './header.less'
 import * as headerActions from './header.action'
 class Header extends Component {
@@ -11,9 +11,9 @@ class Header extends Component {
         const { dispatch } = this.props
         dispatch(headerActions.changePage(index))
     }
-    
+
     removeCookie = () => {
-        const {history} = this.props
+        const { history } = this.props
         cookie.remove("user")
         setTimeout(() => {
             history.push("/")
@@ -43,34 +43,35 @@ class Header extends Component {
                     </li>
                     {
                         !cookie.load("user") ?
-                            <li className={`list-item ${window.location.pathname.indexOf("login") >= 0  ? 'active' : ''}`}>
+                            <li className={`list-item ${window.location.pathname.indexOf("login") >= 0 ? 'active' : ''}`}>
                                 <Link to="/login">LOGIN</Link>
                             </li> : null
                     }
                     {
                         !cookie.load("user") ?
-                        <li className={`list-item ${window.location.pathname === '/register' ? 'active' : ''}`}>
-                            <Link to="/register">REGISTER</Link>
-                        </li> : null
-                    }
-                    {
-                        cookie.load("user") ?
-                            <li className="list-item">
-                                <a>{cookie.load("user")}</a>
+                            <li className={`list-item ${window.location.pathname === '/register' ? 'active' : ''}`}>
+                                <Link to="/register">REGISTER</Link>
                             </li> : null
                     }
                     {
                         cookie.load("user") ?
+                            <li className="list-item">
+                                <Avatar style={{ backgroundColor: '#87d068' }} icon="user" />
+                                <a>{cookie.load("user")}</a>
+                            </li> : null
+                    }
+                    {
+                    cookie.load("user") ?
                         <li className="list-item">
                             <a onClick={this.removeCookie}>LOGOUT</a>
                         </li> : null
-                    }
+                }
                 </ul>
-            </div>
+            </div >
         )
     }
 }
-function mapStateToProps({ header}) {
+function mapStateToProps({ header }) {
     return {
         header,
     }

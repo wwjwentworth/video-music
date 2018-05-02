@@ -25,7 +25,11 @@ class Community extends Component {
         dispatch(playerActions.playSong(song))
     }
     thumbUp = (community) => {
-        const { dispatch } = this.props
+        const { dispatch, history } = this.props
+        if(!cookie.load("user")) {
+            history.push('/login')
+            return;
+        }
         dispatch(communityActions.thumbUp(community))
     }
     toggleCommentArea = (index) => {
@@ -40,7 +44,11 @@ class Community extends Component {
         }
     }
     publishComment = (community) => {
-        const { dispatch } = this.props
+        const { dispatch, history } = this.props
+        if(!cookie.load("user")) {
+            history.push('/login')
+            return;
+        }
         this.setState({
             commentText: ''
         })
@@ -59,8 +67,9 @@ class Community extends Component {
     }
     fork = (community) => {
         const { dispatch, history } = this.props
-        if (!cookie.load("user")) {
-            alert("222")
+        if(!cookie.load("user")) {
+            history.push('/login')
+            return;
         }
         const forkInfo = {
             user: cookie.load("user"),
