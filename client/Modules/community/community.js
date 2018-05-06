@@ -53,7 +53,7 @@ class Community extends Component {
             commentText: ''
         })
         community.comment.push({
-            user: community.user,
+            user: cookie.load("user"),
             time: format(new Date(), FORMAT_TIME),
             text: this.state.commentText,
         })

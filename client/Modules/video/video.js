@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import Carousel from '../../components/carousel/carousel'
+// import Carousel from '../../components/carousel/carousel'
+import { Carousel } from 'antd'
 import * as videoActions from './video.action'
 import * as headerActions from '../../components/header/header.action';
 import Header from '../../components/header/header'
@@ -28,7 +29,7 @@ class Videos extends Component {
             <div className="wwj-video">
                 <Header></Header>
                 {this.renderBanner(this.props.video)}
-                <div className="content">
+                <div className="extra">
                     {this.renderPushOnList(this.props.video)}
                     {this.renderCutList(this.props.video)}
                 </div>
@@ -42,7 +43,49 @@ class Videos extends Component {
                 <div className="banner">
                     {
                         !loading &&
-                        <Carousel items={bannerList}>
+                        <Carousel autoplay className="carousel" >
+                            {
+                                bannerList.map((item, idx) => {
+                                    return (
+                                        <div key={idx} className="carousel-item" >
+                                            <div className="wrap"></div>
+                                            <div className="content">
+                                                <img src={item.img} alt="" />
+                                                <div>
+                                                    {
+                                                        item.text_ch &&
+                                                        <p className="text text-ch">{item.text_ch}</p>
+                                                    }
+                                                    {
+                                                        item.text_en &&
+                                                        <p className="text text-en">{item.text_en}</p>
+                                                    }
+                                                    {
+                                                        item.text_ch &&
+                                                        <button>START YOUR TRAIL</button>
+                                                    }
+                                                    {
+                                                        item.director &&
+                                                        <div className="post">
+                                                            <div className="post-wrap"></div>
+                                                            <div className="wrap-content">
+                                                                <p className="item title">{item.title}</p>
+                                                                <p className="item date">{item.date}</p>
+                                                                <p className="item director">{item.director}</p>
+                                                                <p className="item actors">{item.actors}</p>
+                                                                <p className="item info">{item.info}</p>
+                                                            </div>
+                                                        </div>
+                                                    }
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
                         </Carousel>
                     }
                 </div>

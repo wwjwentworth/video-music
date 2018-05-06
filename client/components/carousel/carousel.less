@@ -126,54 +126,6 @@
             
         }
     }
-    .carousel-arrow{
-        display: inline-block;
-        color: @font-color;
-        font-size: .5rem;
-        position: absolute;
-        width: 0.7rem;
-        height: 0.6rem;
-        line-height: 0.6rem;
-        text-align: center;
-        top: 50%;
-        margin-top: -0.3rem;
-        z-index: 100;
-        cursor: pointer;
-        font-weight: 700;
-        &:hover{
-            background: rgba(0,0,0,0.2)
-        }
-        &.carousel-arrow-left{
-            left: 0;
-        }
-        &.carousel-arrow-right{
-            right: 0;
-        }
-    }
-    .carousel-dots-wrap{
-        z-index: 90;
-        text-align: center;
-        width: 100%;
-        position: absolute;
-        bottom: 0;
-        .carousel-dot{
-            display: inline-block;
-            width: 0.06rem;
-            height: 0.06rem;
-            border:3px solid #333;
-            margin: 0.06rem;
-            cursor: pointer;
-            border-radius: .2rem;
-            &:hover{
-                border:3px solid @font-color;
-            }
-            
-        }
-        .carousel-dot-selected {
-            background: @font-color;
-            border:3px solid @font-color;
-        }
-    }
 }
 @keyframes fade-in {
     0% { opacity: 0; }
